@@ -13,9 +13,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    math.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    math.h
 
 FORMS    += mainwindow.ui
 DEFINES += QT_NO_VERSION_TAGGING
