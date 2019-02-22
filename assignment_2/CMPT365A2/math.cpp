@@ -25,17 +25,15 @@ cv::Vec3b rgb2yuv(cv::Vec3b pixel){
     return yuv;
 }
 
-cv::Mat rgb2yuv(cv::Mat &img){
-    cv::Mat out;
-    out.create(img.size(), CV_8U);
+void rgb2yuv(cv::Mat &img){
 
     for(int i=0; i<img.rows; i++){
         for (int j=0; j<img.cols; j++) {
-            out.at<cv::Vec3b>(i,j) = rgb2yuv(img.at<cv::Vec3b>(i,j));
+            img.at<cv::Vec3b>(i,j) = rgb2yuv(img.at<cv::Vec3b>(i,j));
         }
     }
 
-    return out;
+    return ;
 }
 
 cv::Vec3b yuv2rgb(cv::Vec3b pixel){
@@ -49,22 +47,20 @@ cv::Vec3b yuv2rgb(cv::Vec3b pixel){
     return rgb;
 }
 
-cv::Mat yuv2rgb(cv::Mat &img){
+void yuv2rgb(cv::Mat &img){
     cv::Mat out;
-    out.create(img.size(), CV_8U);
+    out.create(img.size(), CV_8UC3);
 
     for(int i=0; i<img.rows; i++){
         for (int j=0; j<img.cols; j++) {
-            out.at<cv::Vec3b>(i,j) = yuv2rgb(img.at<cv::Vec3b>(i,j));
+            img.at<cv::Vec3b>(i,j) = yuv2rgb(img.at<cv::Vec3b>(i,j));
         }
     }
-    return out;
+    return;
 }
 
 
-cv::Mat chroma_subsample(cv::Mat &img, int a, int b, int c) {
-    cv::Mat out;
-    out.create(img.size(), CV_8U);
+void chroma_subsample(cv::Mat &img, int a, int b, int c) {
 
     int even_smpl_w = a/b;
     int odd_smpl_w = 0;
@@ -78,28 +74,31 @@ cv::Mat chroma_subsample(cv::Mat &img, int a, int b, int c) {
                 for(int k = 1; k<even_smpl_w; k++){
                     //make smpl with pixels the same by coping the first wone to the
                     //next width-1 pixels
-                    out.at<cv::Vec3b>(i,j+k)[1] = img.at<cv::Vec3b>(i,j)[1];
-                    out.at<cv::Vec3b>(i,j+k)[2] = img.at<cv::Vec3b>(i,j)[2];
+                    if(j+k !=img.cols ) {
+                        img.at<cv::Vec3b>(i,j+k)[1] = img.at<cv::Vec3b>(i,j)[1];
+                        img.at<cv::Vec3b>(i,j+k)[2] = img.at<cv::Vec3b>(i,j)[2];
+                    }
                 }
             }
         } else { //odd lines
             if(odd_smpl_w == 0) {
                 for (int j=0; j<img.cols; j++) {
                     //copy croma of pixel above
-                    out.at<cv::Vec3b>(i,j)[1] = img.at<cv::Vec3b>(i-1,j)[1];
-                    out.at<cv::Vec3b>(i,j)[2] = img.at<cv::Vec3b>(i-1,j)[2];
+                    img.at<cv::Vec3b>(i,j)[1] = img.at<cv::Vec3b>(i-1,j)[1];
+                    img.at<cv::Vec3b>(i,j)[2] = img.at<cv::Vec3b>(i-1,j)[2];
                 }
             } else {
                 for (int j=0; j<img.cols; j+=odd_smpl_w) {
                     for(int k = 1; k<odd_smpl_w; k++){
                         //make smpl with pixels the same by coping the first wone to the
                         //next width-1 pixels
-                        out.at<cv::Vec3b>(i,j+k)[1] = img.at<cv::Vec3b>(i,j)[1];
-                        out.at<cv::Vec3b>(i,j+k)[2] = img.at<cv::Vec3b>(i,j)[2];
+                        if(j+k !=img.cols ) {
+                            img.at<cv::Vec3b>(i,j+k)[1] = img.at<cv::Vec3b>(i,j)[1];
+                            img.at<cv::Vec3b>(i,j+k)[2] = img.at<cv::Vec3b>(i,j)[2];
+                        }
                     }
                 }
             }
         }
     }
-    return out;
 }

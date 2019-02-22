@@ -20,6 +20,8 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/opencv.hpp>
 
+#include "math.h"
+
 using namespace cv;
 
 namespace Ui {

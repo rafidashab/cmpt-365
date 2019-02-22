@@ -64,32 +64,38 @@ void MainWindow::loadImage()
 }
 
 // slot to calculate Y channel of cvImg and display it on a QLabel
-void MainWindow::convertImage()
-{
-    if (cvImg.empty())
-    {
+void MainWindow::convertImage() {
+    if (cvImg.empty()) {
             return;
-        }
-        const float fWeightR = 0.299;
-        const float fWeightB = 0.114;
-        const float fWeightG = 1 - fWeightR - fWeightB;
-        // create an output image which has the same size as the input image
-        // CV_8U means the output image has one channel, each channel has an unsigned byte
-        convertedImg.create(cvImg.size(), CV_8U);
-        int nWidth = convertedImg.cols;
-        int nHeight = convertedImg.rows;
-        for (int iterW = 0; iterW<nWidth; iterW++)
-        {
-            for (int iterR = 0; iterR<nHeight; iterR++)
-            {
-                // get the RGB values from the input image
-                cv::Vec3b vRGB = cvImg.at<cv::Vec3b>(iterR, iterW);
-                convertedImg.at<uchar>(iterR, iterW) = fWeightR*vRGB[0] + fWeightG*vRGB[1] + fWeightB*vRGB[2];
-            }
-        }
-        QImage qImage = MatGrayScale2QImage(convertedImg);
-        img2->setPixmap(QPixmap::fromImage(qImage));
+    }
+//        const float fWeightR = 0.299;
+//        const float fWeightB = 0.114;
+//        const float fWeightG = 1 - fWeightR - fWeightB;
+//        // create an output image which has the same size as the input image
+//        // CV_8U means the output image has one channel, each channel has an unsigned byte
+//        convertedImg.create(cvImg.size(), CV_8U);
+//        int nWidth = convertedImg.cols;
+//        int nHeight = convertedImg.rows;
+//        for (int iterW = 0; iterW<nWidth; iterW++)
+//        {
+//            for (int iterR = 0; iterR<nHeight; iterR++)
+//            {
+//                // get the RGB values from the input image
+//                cv::Vec3b vRGB = cvImg.at<cv::Vec3b>(iterR, iterW);
+//                convertedImg.at<uchar>(iterR, iterW) = fWeightR*vRGB[0] + fWeightG*vRGB[1] + fWeightB*vRGB[2];
+//            }
+//        }
+//        QImage qImage = MatGrayScale2QImage(convertedImg);
+//        img2->setPixmap(QPixmap::fromImage(qImage));
 
+    convertedImg.create(cvImg.size(), CV_8UC3);
+    cvImg.copyTo(convertedImg);
+    rgb2yuv(convertedImg);
+    chroma_subsample(convertedImg);
+    yuv2rgb(convertedImg);
+
+    QImage qImage = MatRGB2QImage(convertedImg);
+    img2->setPixmap(QPixmap::fromImage(qImage));
 }
 
 // convert a opencv Mat containing RGB data to QImage
