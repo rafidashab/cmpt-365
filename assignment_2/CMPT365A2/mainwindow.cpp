@@ -91,9 +91,8 @@ void MainWindow::convertImage() {
     convertedImg.create(cvImg.size(), CV_8UC3);
     cvImg.copyTo(convertedImg);
     rgb2yuv(convertedImg);
-    chroma_subsample(convertedImg);
+    //chroma_subsample(convertedImg);
     yuv2rgb(convertedImg);
-
     QImage qImage = MatRGB2QImage(convertedImg);
     img2->setPixmap(QPixmap::fromImage(qImage));
 }

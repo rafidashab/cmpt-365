@@ -16,13 +16,18 @@ static cv::Matx33d dWeights_yuv2rgb(
 
 cv::Vec3b rgb2yuv(cv::Vec3b pixel){
 
-    cv::Vec3b yuv;
+    cv::Vec3d yuv;
 
-    yuv[0]  = pixel.dot(dWeights_rgb2yuv.row(0).t());
-    yuv[1]  = pixel.dot(dWeights_rgb2yuv.row(2).t());
-    yuv[2]  = pixel.dot(dWeights_rgb2yuv.row(3).t());
-
-    return yuv;
+    //yuv[0]  = pixel.ddot(dWeights_rgb2yuv.row(0).t());
+    //yuv[1]  = pixel.ddot(dWeights_rgb2yuv.row(1).t());
+    //yuv[2]  = pixel.ddot(dWeights_rgb2yuv.row(2).t());
+    yuv = dWeights_rgb2yuv* (cv::Vec3d)pixel;
+    //clamps values to byte range
+    for(int i=0; i<3; i++){
+        if (yuv[i]<0) yuv[i]=0;
+        else if(yuv[i]>255) yuv[i] = 255;
+    }
+    return (cv::Vec3b)yuv;
 }
 
 void rgb2yuv(cv::Mat &img){
@@ -38,18 +43,21 @@ void rgb2yuv(cv::Mat &img){
 
 cv::Vec3b yuv2rgb(cv::Vec3b pixel){
 
-    cv::Vec3b rgb;
+    cv::Vec3d rgb;
 
-    rgb[0]  = pixel.dot(dWeights_yuv2rgb.row(0).t());
-    rgb[1]  = pixel.dot(dWeights_yuv2rgb.row(2).t());
-    rgb[2]  = pixel.dot(dWeights_yuv2rgb.row(3).t());
-
-    return rgb;
+//    rgb[0]  = pixel.cross(dWeights_yuv2rgb.row(0).t());
+//    rgb[1]  = pixel.ddot(dWeights_yuv2rgb.row(1).t());
+//    rgb[2]  = pixel.ddot(dWeights_yuv2rgb.row(2).t());
+    rgb = dWeights_yuv2rgb * (cv::Vec3d)pixel; // * is matric multiplication and .mul() is element multiplication
+    //clamps values to byte range
+    for(int i=0; i<3; i++){
+        if (rgb[i]<0) rgb[i]=0;
+        else if(rgb[i]>255) rgb[i] = 255;
+    }
+    return (cv::Vec3b)rgb;
 }
 
 void yuv2rgb(cv::Mat &img){
-    cv::Mat out;
-    out.create(img.size(), CV_8UC3);
 
     for(int i=0; i<img.rows; i++){
         for (int j=0; j<img.cols; j++) {
