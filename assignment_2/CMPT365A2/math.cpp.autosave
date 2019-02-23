@@ -106,7 +106,7 @@ void chroma_subsample(cv::Mat &img, int a, int b, int c) {
                 for(int k = 1; k<even_smpl_w; k++){
                     //make smpl with pixels the same by coping the first wone to the
                     //next width-1 pixels
-                    if(j+k !=img.cols ) {
+                    if(j+k <img.cols ) {
                         img.at<cv::Vec3b>(i,j+k)[1] = img.at<cv::Vec3b>(i,j)[1];
                         img.at<cv::Vec3b>(i,j+k)[2] = img.at<cv::Vec3b>(i,j)[2];
                     }
@@ -124,7 +124,7 @@ void chroma_subsample(cv::Mat &img, int a, int b, int c) {
                     for(int k = 1; k<odd_smpl_w; k++){
                         //make smpl with pixels the same by coping the first wone to the
                         //next width-1 pixels
-                        if(j+k !=img.cols ) {
+                        if(j+k <img.cols ) {
                             img.at<cv::Vec3b>(i,j+k)[1] = img.at<cv::Vec3b>(i,j)[1];
                             img.at<cv::Vec3b>(i,j+k)[2] = img.at<cv::Vec3b>(i,j)[2];
                         }

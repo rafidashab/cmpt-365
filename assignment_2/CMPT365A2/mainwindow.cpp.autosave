@@ -59,6 +59,7 @@ void MainWindow::loadImage()
         tr("Load Image"), "",
         tr("All Files (*)"));
     cvImg = cv::imread(fileName.toStdString(), IMREAD_COLOR);
+    
     QImage qImage = MatRGB2QImage(cvImg);
     img1->setPixmap(QPixmap::fromImage(qImage));
 }
