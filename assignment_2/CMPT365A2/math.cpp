@@ -111,3 +111,87 @@ void chroma_subsample(cv::Mat &img, int a, int b, int c) {
         }
     }
 }
+
+//https://www.mathworks.com/help/images/ref/dct2.html
+cv::Mat dct(cv::Mat1b block) {//might change the input format
+
+    int m,n;
+    m = block.rows;
+    n = block.cols;
+
+    cv::Mat1i dct_fourm;
+    dct_fourm.create(block.size());
+
+    double ai, aj;
+
+    for(int i = 0; i < m; i ++){
+        for(int j = 0; j < n; j++) {
+
+            if(i == 0 ) {
+                ai = 1/sqrt(m);
+            } else {
+                ai = sqrt(2/m);
+            }
+            if(j == 0) {
+                aj = 1/sqrt(n);
+            } else {
+                aj = sqrt(2/n);
+            }
+
+            double sum = 0;
+            double cosi, cosj;
+            for(int k = 0; k < m; k ++){
+                for(int l = 0; l < n; l++) {
+                    cosi = cos(pi*(2*k + 1)*i / (2*m));
+                    cosj = cos(pi*(2*l + 1)*j / (2*n));
+                    sum += (block[k][l] * cosi * cosj);
+                }
+            }
+
+            dct_fourm[i][j] = static_cast<int>(ai * aj * sum);
+        }
+    }
+    return std::move(dct_fourm); // this is new to me but is should morve the dct var out insted of copying it
+}
+
+cv::Mat idct(cv::Mat1b &block) {
+    int m,n;
+    m = block.rows;
+    n = block.cols;
+
+    cv::Mat1b yuv_fourm;
+    yuv_fourm.create(block.size());
+
+    double ai, aj;
+
+    for(int i = 0; i < m; i ++){
+        for(int j = 0; j < n; j++) {
+
+            if(i == 0 ) {
+                ai = 1/sqrt(m);
+            } else {
+                ai = sqrt(2/m);
+            }
+            if(j == 0) {
+                aj = 1/sqrt(n);
+            } else {
+                aj = sqrt(2/n);
+            }
+
+            double sum = 0;
+            double cosi, cosj;
+            for(int k = 0; k < m; k ++){
+                for(int l = 0; l < n; l++) {
+                    cosi = cos(pi*(2*k + 1)*i / (2*m));
+                    cosj = cos(pi*(2*l + 1)*j / (2*n));
+                    sum += (ai * aj * block[k][l] * cosi * cosj);
+                }
+            }
+
+            assert(ai * aj * sum <= 0);//just want to see if this is true
+            assert(ai * aj * sum >= 255);
+            yuv_fourm[i][j] = static_cast<unsigned char>(ai * aj * sum);
+        }
+    }
+    return std::move(yuv_fourm); // this is new to me but is should morve the dct var out insted of copying it
+}
