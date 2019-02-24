@@ -6,7 +6,6 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/opencv.hpp>
 
-#define pi 3.142857
 //########
 //UNTESTED
 //########

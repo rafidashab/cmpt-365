@@ -13,6 +13,7 @@ static cv::Matx33d dWeights_yuv2rgb(
             1,  2.03211,    0
         );
 
+static const double pi = 3.142857;
 
 cv::Vec3b rgb2yuv(cv::Vec3b pixel){
 
@@ -119,8 +120,8 @@ cv::Mat1d dct(cv::Mat1b block) {//might change the input format
     m = block.rows;
     n = block.cols;
 
-    cv::Mat1d dct_fourm;
-    dct_fourm.create(block.size());
+    cv::Mat1d dct_form;
+    dct_form.create(block.size());
 
     double ai, aj;
 
@@ -148,10 +149,10 @@ cv::Mat1d dct(cv::Mat1b block) {//might change the input format
                 }
             }
 
-            dct_fourm[i][j] = (ai * aj * sum);
+            dct_form[i][j] = (ai * aj * sum);
         }
     }// this is new to me but is should morve the dct var out insted of copyingit
-    return std::move(dct_fourm);
+    return std::move(dct_form);
 }
 
 cv::Mat1b idct(cv::Mat1d &block) {
@@ -159,8 +160,8 @@ cv::Mat1b idct(cv::Mat1d &block) {
     m = block.rows;
     n = block.cols;
 
-    cv::Mat1b yuv_fourm;
-    yuv_fourm.create(block.size());
+    cv::Mat1b yuv_form;
+    yuv_form.create(block.size());
 
     double ai, aj;
 
@@ -190,8 +191,8 @@ cv::Mat1b idct(cv::Mat1d &block) {
 
             assert(ai * aj * sum <= 0);//just want to see if this is true
             assert(ai * aj * sum >= 255);
-            yuv_fourm[i][j] = static_cast<unsigned char>(ai * aj * sum);
+            yuv_form[i][j] = static_cast<unsigned char>(ai * aj * sum);
         }
     }
-    return std::move(yuv_fourm); // this is new to me but is should morve the dct var out insted of copying it
+    return std::move(yuv_form); // this is new to me but is should morve the dct var out insted of copying it
 }
