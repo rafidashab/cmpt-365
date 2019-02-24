@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.11.3
+** Created by: Qt User Interface Compiler version 5.9.5
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
@@ -114,9 +115,6 @@ public:
         gridLayout->addWidget(subsampling_label, 1, 4, 1, 1);
 
         comboBox = new QComboBox(centralWidget);
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
         comboBox->setObjectName(QStringLiteral("comboBox"));
         QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
@@ -255,59 +253,61 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
-        actionQuit->setText(QApplication::translate("MainWindow", "Quit", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
+        actionQuit->setText(QApplication::translate("MainWindow", "Quit", Q_NULLPTR));
         img1->setText(QString());
-        load->setText(QApplication::translate("MainWindow", "Load", nullptr));
-        convert->setText(QApplication::translate("MainWindow", "Convert", nullptr));
-        subsampling_label->setText(QApplication::translate("MainWindow", "Croma Subsampling", nullptr));
-        comboBox->setItemText(0, QApplication::translate("MainWindow", "4:2:0", nullptr));
-        comboBox->setItemText(1, QApplication::translate("MainWindow", "4:2:2", nullptr));
-        comboBox->setItemText(2, QApplication::translate("MainWindow", "4:4:4", nullptr));
-
+        load->setText(QApplication::translate("MainWindow", "Load", Q_NULLPTR));
+        convert->setText(QApplication::translate("MainWindow", "Convert", Q_NULLPTR));
+        subsampling_label->setText(QApplication::translate("MainWindow", "Croma Subsampling", Q_NULLPTR));
+        comboBox->clear();
+        comboBox->insertItems(0, QStringList()
+         << QApplication::translate("MainWindow", "4:2:0", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "4:2:2", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "4:4:4", Q_NULLPTR)
+        );
         QTableWidgetItem *___qtablewidgetitem = quantDisplay->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "0", nullptr));
+        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem1 = quantDisplay->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "1", nullptr));
+        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "1", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem2 = quantDisplay->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "2", nullptr));
+        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "2", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem3 = quantDisplay->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "3", nullptr));
+        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "3", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem4 = quantDisplay->horizontalHeaderItem(4);
-        ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "4", nullptr));
+        ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "4", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem5 = quantDisplay->horizontalHeaderItem(5);
-        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "5", nullptr));
+        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "5", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem6 = quantDisplay->horizontalHeaderItem(6);
-        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "6", nullptr));
+        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "6", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem7 = quantDisplay->horizontalHeaderItem(7);
-        ___qtablewidgetitem7->setText(QApplication::translate("MainWindow", "7", nullptr));
+        ___qtablewidgetitem7->setText(QApplication::translate("MainWindow", "7", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem8 = quantDisplay->verticalHeaderItem(0);
-        ___qtablewidgetitem8->setText(QApplication::translate("MainWindow", "0", nullptr));
+        ___qtablewidgetitem8->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem9 = quantDisplay->verticalHeaderItem(1);
-        ___qtablewidgetitem9->setText(QApplication::translate("MainWindow", "1", nullptr));
+        ___qtablewidgetitem9->setText(QApplication::translate("MainWindow", "1", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem10 = quantDisplay->verticalHeaderItem(2);
-        ___qtablewidgetitem10->setText(QApplication::translate("MainWindow", "2", nullptr));
+        ___qtablewidgetitem10->setText(QApplication::translate("MainWindow", "2", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem11 = quantDisplay->verticalHeaderItem(3);
-        ___qtablewidgetitem11->setText(QApplication::translate("MainWindow", "3", nullptr));
+        ___qtablewidgetitem11->setText(QApplication::translate("MainWindow", "3", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem12 = quantDisplay->verticalHeaderItem(4);
-        ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "4", nullptr));
+        ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "4", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem13 = quantDisplay->verticalHeaderItem(5);
-        ___qtablewidgetitem13->setText(QApplication::translate("MainWindow", "5", nullptr));
+        ___qtablewidgetitem13->setText(QApplication::translate("MainWindow", "5", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem14 = quantDisplay->verticalHeaderItem(6);
-        ___qtablewidgetitem14->setText(QApplication::translate("MainWindow", "6", nullptr));
+        ___qtablewidgetitem14->setText(QApplication::translate("MainWindow", "6", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem15 = quantDisplay->verticalHeaderItem(7);
-        ___qtablewidgetitem15->setText(QApplication::translate("MainWindow", "7", nullptr));
+        ___qtablewidgetitem15->setText(QApplication::translate("MainWindow", "7", Q_NULLPTR));
 
         const bool __sortingEnabled = quantDisplay->isSortingEnabled();
         quantDisplay->setSortingEnabled(false);
         QTableWidgetItem *___qtablewidgetitem16 = quantDisplay->item(0, 0);
-        ___qtablewidgetitem16->setText(QApplication::translate("MainWindow", "123", nullptr));
+        ___qtablewidgetitem16->setText(QApplication::translate("MainWindow", "123", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem17 = quantDisplay->item(1, 0);
-        ___qtablewidgetitem17->setText(QApplication::translate("MainWindow", "21", nullptr));
+        ___qtablewidgetitem17->setText(QApplication::translate("MainWindow", "21", Q_NULLPTR));
         quantDisplay->setSortingEnabled(__sortingEnabled);
 
         img2->setText(QString());
-        menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
+        menuFile->setTitle(QApplication::translate("MainWindow", "File", Q_NULLPTR));
     } // retranslateUi
 
 };

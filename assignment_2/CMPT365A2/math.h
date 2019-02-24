@@ -32,17 +32,24 @@ static int chr_quant[8][8] = {
         };
 
 //prefroms dct on a n x m matric returns an nx m matric of ints that are the dct fourm
-cv::Mat1d dct(cv::Mat1b &block);
+cv::Mat1d block_dct(cv::Mat1b &block);
 
 //reverses the dct matrix returns in unsigned char
 cv::Mat1b idct(cv::Mat1d &block);
 
+
+// Run DCT on every 8*8 blocks in the image on everychannel and return the resulting DCT matrix in a matarray bgr[3]
+cv::Mat runDctOnImage(cv::Mat &img);
+
+
 void quant(cv::Mat block, int q[8][8], double scale );
 void iquant(cv::Mat block, int q[8][8], double scale );
+
 //########
 //HALF TESTED
 //########
 //converts a 3 byte rgb pixel to yub
+
 cv::Vec3b rgb2yuv(cv::Vec3b pixel);
 
 //converts a cv image from rgb to yuv //this cant be an mat3b or 3s leave it as mat took me an hour to find this bug lol

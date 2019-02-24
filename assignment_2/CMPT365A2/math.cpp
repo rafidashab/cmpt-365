@@ -115,7 +115,7 @@ void chroma_subsample(cv::Mat &img, int a, int b, int c) {
 }
 
 //https://www.mathworks.com/help/images/ref/dct2.html
-cv::Mat1d dct(cv::Mat1b block) {//might change the input format
+cv::Mat1d block_dct(cv::Mat1b block) {//might change the input format
 
     int m,n;
     m = block.rows;
@@ -215,3 +215,55 @@ void iquant(cv::Mat block, int q[8][8], double scale ) {
     }
 }
 
+cv::Mat runDctOnImage(cv::Mat &img) {
+
+    //copy the imput image to a new matrix
+    cv::Mat dctmat;
+    cv::Mat result;
+    img.copyTo(dctmat);
+
+
+    //Risize
+    int newRows = dctmat.rows - (dctmat.rows % 8);
+    int newCols = dctmat.cols - (dctmat.cols % 8); //this will cause any image less than 8x8 to be lost though so padding is better i think
+
+    cv::Size size(newRows,newCols);
+    resize(dctmat,dctmat,size); //Resize the image to be have rows and coloums that are multiple of 8
+
+
+    //seperate the 3 RGB channels
+    cv::Mat1b bgr[3];
+    split(dctmat, bgr);
+
+    //temp DCT of image
+    cv::Mat1d smalldctmat;
+
+    //crop image in 8*8 block to be passed to dct
+    cv::Mat1b smallmat;
+
+
+    for (int ch=0; ch<3; ch++)
+    {
+        for (int i=0; i<bgr[ch].rows; i=i+8)
+        {
+
+            for (int j=0; j<bgr[ch].cols; j=j+8)
+            {
+
+               cv::Rect Rec(i,j,8,8);
+               smallmat = (bgr[ch](Rec));
+
+               //apply DCT on the 8*8 block and store it temporarily
+               smalldctmat = block_dct(smallmat);
+
+               //Store the DCT on the image block
+               smalldctmat.copyTo(bgr[ch](Rec));
+
+
+            }
+        }
+    }
+
+    merge(bgr, 3, result);
+    return result;
+}
