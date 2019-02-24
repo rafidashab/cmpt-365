@@ -12,10 +12,10 @@
 //########
 
 //prefroms dct on a n x m matric returns an nx m matric of ints that are the dct fourm
-cv::Mat dct(cv::Mat1b &block);
+cv::Mat1d dct(cv::Mat1b &block);
 
 //reverses the dct matrix returns in unsigned char
-cv::Mat idct(cv::Mat1b &block);
+cv::Mat1b idct(cv::Mat1d &block);
 
 //########
 //HALF TESTED

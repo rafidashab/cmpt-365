@@ -113,13 +113,13 @@ void chroma_subsample(cv::Mat &img, int a, int b, int c) {
 }
 
 //https://www.mathworks.com/help/images/ref/dct2.html
-cv::Mat dct(cv::Mat1b block) {//might change the input format
+cv::Mat1d dct(cv::Mat1b block) {//might change the input format
 
     int m,n;
     m = block.rows;
     n = block.cols;
 
-    cv::Mat1i dct_fourm;
+    cv::Mat1d dct_fourm;
     dct_fourm.create(block.size());
 
     double ai, aj;
@@ -148,13 +148,13 @@ cv::Mat dct(cv::Mat1b block) {//might change the input format
                 }
             }
 
-            dct_fourm[i][j] = static_cast<int>(ai * aj * sum);
+            dct_fourm[i][j] = (ai * aj * sum);
         }
-    }
-    return std::move(dct_fourm); // this is new to me but is should morve the dct var out insted of copying it
+    }// this is new to me but is should morve the dct var out insted of copyingit
+    return std::move(dct_fourm);
 }
 
-cv::Mat idct(cv::Mat1b &block) {
+cv::Mat1b idct(cv::Mat1d &block) {
     int m,n;
     m = block.rows;
     n = block.cols;
