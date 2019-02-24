@@ -90,6 +90,7 @@ void MainWindow::convertImage() {
 
     convertedImg.create(cvImg.size(), CV_8UC3);
     cvImg.copyTo(convertedImg);
+    std::cout<< convertedImg.type() << std::endl;
     rgb2yuv(convertedImg);
     chroma_subsample(convertedImg);
     yuv2rgb(convertedImg);

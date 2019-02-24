@@ -22,10 +22,10 @@ cv::Mat1b idct(cv::Mat1d &block);
 //converts a 3 byte rgb pixel to yub
 cv::Vec3b rgb2yuv(cv::Vec3b pixel);
 
-//converts a cv image from rgb to yuv
-void rgb2yuv(cv::Mat3b &img);
+//converts a cv image from rgb to yuv //this cant be an mat3b or 3s leave it as mat took me an hour to find this bug lol
+void rgb2yuv(cv::Mat &img);
 
-//converta a yub pixel to rgb
+//converta a yub pixel to rgb //has to be unsigned
 cv::Vec3b yuv2rgb(cv::Vec3b pixel);
 
 //converts a yuv cv img to rgb

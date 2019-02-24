@@ -18,7 +18,7 @@ static const double pi = 3.142857;
 cv::Vec3b rgb2yuv(cv::Vec3b pixel){
 
     cv::Vec3d yuv;
-    yuv = dWeights_rgb2yuv* (cv::Vec3d)pixel;// * is matric multiplication and .mul() is element multiplication
+    yuv = dWeights_rgb2yuv * (cv::Vec3d)pixel;// * is matric multiplication and .mul() is element multiplication
     yuv[0] += 16;
     yuv[1] += 128;
     yuv[2] += 128;
@@ -27,7 +27,7 @@ cv::Vec3b rgb2yuv(cv::Vec3b pixel){
         if (yuv[i]<0) yuv[i]=0;
         else if(yuv[i]>255) yuv[i] = 255;
     }
-    return (cv::Vec3b)yuv;
+    return static_cast<cv::Vec3b>(yuv);
 }
 
 void rgb2yuv(cv::Mat &img){
@@ -45,7 +45,7 @@ cv::Vec3b yuv2rgb(cv::Vec3b pixel){
 
     cv::Vec3d rgb;
 
-    cv::Vec3d tmp = (cv::Vec3d)pixel;
+    cv::Vec3d tmp = static_cast<cv::Vec3d>(pixel);
     tmp[0]-=16;
     tmp[1]-=128;
     tmp[2]-=128;
@@ -56,7 +56,7 @@ cv::Vec3b yuv2rgb(cv::Vec3b pixel){
         if (rgb[i]<0) rgb[i]=0;
         else if(rgb[i]>255) rgb[i] = 255;
     }
-    return (cv::Vec3b)rgb;
+    return static_cast<cv::Vec3s>(rgb);
 }
 
 void yuv2rgb(cv::Mat &img){
