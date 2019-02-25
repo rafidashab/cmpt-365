@@ -10,6 +10,24 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // title
     setWindowTitle(tr("Image Converter"));
+
+    subsampling = cv::Vec3i(4,2,0);
+
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            //
+            QTableWidgetItem *pCell = ui->quantDisplay->item(i, j);
+            if(!pCell)
+            {
+                pCell = new QTableWidgetItem;
+                ui->quantDisplay->setItem(i, j, pCell);
+            }
+
+            ui->quantDisplay->item(i,j)->setText(QString::number(lum_quant[i][j]));
+
+        }
+    }
+
 }
 
 MainWindow::~MainWindow()
@@ -62,6 +80,7 @@ void MainWindow::on_load_clicked()
     cvImg = cv::imread(fileName.toStdString(), IMREAD_COLOR);
     QImage qImage = MatRGB2QImage(cvImg);
     ui->img1->setPixmap(QPixmap::fromImage(qImage));
+    //ui->img1->resize(cvImg.cols, cvImg.rows);
 }
 
 void MainWindow::on_convert_clicked()
@@ -73,8 +92,28 @@ void MainWindow::on_convert_clicked()
     cvImg.copyTo(convertedImg);
     std::cout<< convertedImg.type() << std::endl;
     rgb2yuv(convertedImg);
-    chroma_subsample(convertedImg);
+    chroma_subsample(convertedImg, subsampling[0], subsampling[1], subsampling[2]);
     yuv2rgb(convertedImg);
     QImage qImage = MatRGB2QImage(convertedImg);
     ui->img2->setPixmap(QPixmap::fromImage(qImage));
+
+    //ui->quantDisplay->setItem(2,2,)
+
+}
+
+void MainWindow::on_comboBox_currentIndexChanged(int index)
+{
+    switch (index) {
+    case 0:
+        subsampling = cv::Vec3i(4,2,0);
+        break;
+    case 1:
+        subsampling = cv::Vec3i(4,2,2);
+        break;
+    case 2:
+        subsampling = cv::Vec3i(4,4,4);
+        break;
+    }
+
+    on_convert_clicked();
 }

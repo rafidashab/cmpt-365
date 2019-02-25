@@ -13,6 +13,7 @@ static cv::Matx33d dWeights_yuv2rgb(
             1,  2.03211,    0
         );
 
+
 static const double pi = 3.142857;
 
 cv::Vec3b rgb2yuv(cv::Vec3b pixel){
@@ -196,3 +197,21 @@ cv::Mat1b idct(cv::Mat1d &block) {
     }
     return std::move(yuv_form); // this is new to me but is should morve the dct var out insted of copying it
 }
+
+void quant(cv::Mat block, int q[8][8], double scale ) {
+    assert(block.cols == 8 && block.rows == 8);
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            block.at<double>(i,j) *= 1/(static_cast<double>(q[i][j]) * scale);
+        }
+    }
+}
+void iquant(cv::Mat block, int q[8][8], double scale ) {
+    assert(block.cols == 8 && block.rows == 8);
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            block.at<double>(i,j) *= (static_cast<double>(q[i][j]) * scale);
+        }
+    }
+}
+

@@ -44,6 +44,8 @@ private slots:
 
     void on_convert_clicked();
 
+    void on_comboBox_currentIndexChanged(int index);
+
 private:
     QImage MatRGB2QImage(const cv::Mat3b &src);
     QImage MatGrayScale2QImage(const cv::Mat_<double> &src);
@@ -55,6 +57,7 @@ private:
 //    QLayout *mainLayout, *buttonLayout;
 //    QPushButton *openButton, *convertButton;
     Mat cvImg, convertedImg;
+    cv::Vec3i subsampling;
 
 };
 
