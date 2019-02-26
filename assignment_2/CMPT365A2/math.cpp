@@ -224,14 +224,34 @@ void resize8x8(cv::Mat &img) {
     int newRows = img.rows - (img.rows % 8);
     int newCols = img.cols - (img.cols % 8); //this will cause any image less than 8x8 to be lost though so padding is better i think
 
-    cv::Size size(newRows,newCols);
-    if(size != img.size()){
-        std::cout << "Im a bad size" << std::endl;
-    } else {
+//    std::cout << img.rows << std::endl;
+//    std::cout << img.cols << std::endl;
+
+
+//    cv::Size size(newCols,newRows);
+//    if(size != img.size()){
+//        std::cout << "Im a bad size" << std::endl;
+//    } else {
+//        std::cout << "Im a good size" << std::endl;
+//        return;
+//    }
+
+//    resize(img , img, size); //Resize the image to be have rows and coloums that are multiple of 8
+
+    cv::Rect crop(0,0,newCols,newRows);
+
+    std::cout << "width : " << newCols << std::endl;
+    std::cout << "Height :" << newRows << std::endl;
+
+    if (newRows == img.rows && newCols == img.cols) {
         std::cout << "Im a good size" << std::endl;
         return;
     }
-    resize(img,img,size); //Resize the image to be have rows and coloums that are multiple of 8
+    std::cout << "Im a bad size" << std::endl;
+    cv::Mat test;
+    test = img(crop);
+    test.copyTo(img);
+
 }
 
 cv::Mat runDctOnImage(cv::Mat &img) {
@@ -256,15 +276,15 @@ cv::Mat runDctOnImage(cv::Mat &img) {
 
     for (int ch=0; ch<3; ch++)
     {
-        for (int i=0; i<yuv[ch].rows; i=i+8)
+        for (int i=0; i<yuv[ch].cols; i=i+8)
         {
 
-            for (int j=0; j<yuv[ch].cols; j=j+8)
+            for (int j=0; j<yuv[ch].rows; j=j+8)
             {
-
+                std::cout << "I work 1 " << std::endl;
                cv::Rect Rec(i,j,8,8);
                small = (yuv[ch](Rec));
-
+                std::cout << "I work 2" << std::endl;
 
                smalldctmat = dct88(small);
 
