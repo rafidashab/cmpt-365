@@ -39,7 +39,12 @@ static int uniform_quant[8][8] = {
 
 };
 
+
 static cv::Matx<double,8,8> dctMatrix;
+
+//helper function to resize images to have colums and rows that are multiple of 8
+void resize8x8(cv::Mat &img);
+
 
 
 //prefroms dct on a n x m matric returns an nx m matric of ints that are the dct fourm

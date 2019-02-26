@@ -218,6 +218,22 @@ void iquant(cv::Matx<double,8,8> block, int q[8][8], double scale ) {
     }
 }
 
+
+void resize8x8(cv::Mat &img) {
+
+    int newRows = img.rows - (img.rows % 8);
+    int newCols = img.cols - (img.cols % 8); //this will cause any image less than 8x8 to be lost though so padding is better i think
+
+    cv::Size size(newRows,newCols);
+    if(size != img.size()){
+        std::cout << "Im a bad size" << std::endl;
+    } else {
+        std::cout << "Im a good size" << std::endl;
+        return;
+    }
+    resize(img,img,size); //Resize the image to be have rows and coloums that are multiple of 8
+}
+
 cv::Mat runDctOnImage(cv::Mat &img) {
 
     //copy the imput image to a new matrix
@@ -225,14 +241,7 @@ cv::Mat runDctOnImage(cv::Mat &img) {
     cv::Mat result;
     img.copyTo(dctmat);
 
-
-    //Risize
-    int newRows = dctmat.rows - (dctmat.rows % 8);
-    int newCols = dctmat.cols - (dctmat.cols % 8); //this will cause any image less than 8x8 to be lost though so padding is better i think
-
-    cv::Size size(newRows,newCols);
-    resize(dctmat,dctmat,size); //Resize the image to be have rows and coloums that are multiple of 8
-
+    resize8x8(dctmat);
 
     //seperate the 3 RGB channels
     cv::Mat yuv[3];
@@ -257,19 +266,19 @@ cv::Mat runDctOnImage(cv::Mat &img) {
                small = (yuv[ch](Rec));
 
 
-                smalldctmat = dct88(small);
+               smalldctmat = dct88(small);
 
-                if (ch == 0) {
-                    quant(smalldctmat, lum_quant, 1 );
-                    iquant(smalldctmat, lum_quant, 1 );
-                }
+               if (ch == 0) {
+                   quant(smalldctmat, lum_quant, 1 );
+                   iquant(smalldctmat, lum_quant, 1 );
+               }
 
-                else {
-                    quant(smalldctmat, chr_quant, 1 );
-                    iquant(smalldctmat, chr_quant, 1 );
-                }
-               smalldctmat = idct88(smalldctmat);
-               //Store the DCT on the image block
+               else {
+                   quant(smalldctmat, chr_quant, 1 );
+                   iquant(smalldctmat, chr_quant, 1 );
+               }
+              smalldctmat = idct88(smalldctmat);
+              //Store the DCT on the image block
 
                cv::Mat(smalldctmat).copyTo(yuv[ch](Rec));
 
@@ -289,9 +298,7 @@ void init_dct() {
                 dctMatrix(i,j) = 0.5/sqrt(2);
             } else {
                 dctMatrix(i,j) = 0.5*cos((2*j+1)*i*M_PI / 16);
-
             }
-
         }
     }
 }
