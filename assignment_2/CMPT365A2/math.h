@@ -58,9 +58,7 @@ cv::Matx<double,8,8> dct88(cv::Matx<double,8,8> f);
 cv::Matx<double,8,8> idct88(cv::Matx<double,8,8> F);
 
 // Run DCT on every 8*8 blocks in the image on everychannel and return the resulting DCT matrix in a matarray bgr[3]
-cv::Mat runDctOnImage(cv::Mat &img, double quality, bool should_quant); //DCT and Quant
-cv::Mat runiDctOnImage(cv::Mat &img, double quality, bool should_quant);
-
+void runDctOnImage(cv::Mat &img,cv::Mat &dct,  double quality, bool should_quant); //DCT and Quant
 
 void quant(cv::Matx<double,8,8> &block, int q[8][8], double scale );
 void iquant(cv::Matx<double,8,8> &block, int q[8][8], double scale );

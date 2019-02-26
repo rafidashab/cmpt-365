@@ -122,12 +122,12 @@ void MainWindow::on_convert_clicked()
 
     chroma_subsample(convertedImg, subsampling[0], subsampling[1], subsampling[2]);
     cv::Mat tmp;
-    tmp = runDctOnImage(convertedImg, quality, enableQuant);
+    runDctOnImage(convertedImg,tmp, quality, enableQuant);
 
     qImage = MatRGB2QImage(tmp);
     ui->imgDCT->setPixmap(QPixmap::fromImage(qImage));
 
-    convertedImg = runiDctOnImage(tmp, quality, enableQuant);
+    //convertedImg = runiDctOnImage(tmp, quality, enableQuant);
 
     rgb = false;
     cv::Mat yuv[3];
@@ -163,40 +163,6 @@ void MainWindow::on_comboBox_currentIndexChanged(int index) {
     }
 
     on_convert_clicked();
-}
-
-void MainWindow::on_ybutton_clicked()
-{
-    cvImg.copyTo(convertedImg);
-    rgb2yuv(convertedImg);
-    cv::Mat yuv[3];
-    split(convertedImg, yuv);
-
-    QImage qImage = MatGrayScale2QImage(yuv[0]);
-    ui->img2->setPixmap(QPixmap::fromImage(qImage));
-
-}
-
-void MainWindow::on_ubutton_clicked()
-{
-    cvImg.copyTo(convertedImg);
-    rgb2yuv(convertedImg);
-    cv::Mat yuv[3];
-    split(convertedImg, yuv);
-
-    QImage qImage = MatGrayScale2QImage(yuv[1]);
-    ui->img2->setPixmap(QPixmap::fromImage(qImage));
-}
-
-void MainWindow::on_vbutton_clicked()
-{
-    cvImg.copyTo(convertedImg);
-    rgb2yuv(convertedImg);
-    cv::Mat yuv[3];
-    split(convertedImg, yuv);
-
-    QImage qImage = MatGrayScale2QImage(yuv[2]);
-    ui->img2->setPixmap(QPixmap::fromImage(qImage));
 }
 
 void MainWindow::on_qualitySlider_valueChanged(int value)

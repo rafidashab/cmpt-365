@@ -258,7 +258,7 @@ void resize8x8(cv::Mat &img) {
 
 }
 
-cv::Mat runDctOnImage(cv::Mat &img, double quality, bool should_quant) {
+void runDctOnImage(cv::Mat &img, cv::Mat &dct, double quality, bool should_quant) {
 
     //copy the imput image to a new matrix
     cv::Mat dctmat;
@@ -271,8 +271,13 @@ cv::Mat runDctOnImage(cv::Mat &img, double quality, bool should_quant) {
     cv::Mat yuv[3];
     split(dctmat, yuv);
 
+
+    cv::Mat dctret[3];
+    split(dctmat, dctret);
     //temp DCT of image
+
     cv::Matx<double,8,8> smalldctmat;
+    //cv::Matx<double,8,8> smallidctmat;
 
     //crop image in 8*8 block to be passed to dct
     cv::Matx<double,8,8> small;
@@ -295,12 +300,18 @@ cv::Mat runDctOnImage(cv::Mat &img, double quality, bool should_quant) {
                if(should_quant){
                    if (ch == 0) {
                        quant(smalldctmat, lum_quant, quality );
+                       iquant(smalldctmat, lum_quant, quality );
                    }
 
                    else {
                        quant(smalldctmat, chr_quant, quality );
+                       iquant(smalldctmat, lum_quant, quality );
                    }
                }
+                cv::Mat(smalldctmat).copyTo(dctret[ch](Rec));
+
+
+                smalldctmat = idct88(smalldctmat);
 
               //smalldctmat = idct88(smalldctmat);
               //Store the DCT on the image block
@@ -311,67 +322,11 @@ cv::Mat runDctOnImage(cv::Mat &img, double quality, bool should_quant) {
         }
     }
 
-    merge(yuv, 3, result);
-
-    return result;
-}
-
-cv::Mat runiDctOnImage(cv::Mat &img, double quality, bool should_quant) {
-
-    //copy the imput image to a new matrix
-    cv::Mat dctmat;
-    cv::Mat result;
-    img.copyTo(dctmat);
-
-    resize8x8(dctmat);
-
-    //seperate the 3 RGB channels
-    cv::Mat yuv[3];
-    split(dctmat, yuv);
-
-    //temp DCT of image
-    cv::Matx<double,8,8> smalldctmat;
-
-    //crop image in 8*8 block to be passed to dct
-    cv::Matx<double,8,8> small;
-
-
-    for (int ch=0; ch<3; ch++)
-    {
-        for (int i=0; i<yuv[ch].cols; i=i+8)
-        {
-
-            for (int j=0; j<yuv[ch].rows; j=j+8)
-            {
-
-               cv::Rect Rec(i,j,8,8);
-               small = (yuv[ch](Rec));
-
-               if(should_quant){
-                   if (ch == 0) {
-                       iquant(small, lum_quant, quality );
-                   }
-
-                   else {
-                       iquant(small, chr_quant, quality );
-                   }
-               }
-
-
-                smalldctmat = idct88(small);
-
-              //Store the DCT on the image block
-
-               cv::Mat(smalldctmat).copyTo(yuv[ch](Rec));
-
-            }
-        }
-    }
-
-    std::cout << "yuv[0] type "<<yuv[0].type() << std::endl;
-    merge(yuv, 3, result);
-    std::cout << "result type "<<result.type() << std::endl;
-    return result;
+    merge(yuv, 3, img);
+    //result.copyTo(img);
+    merge(dctret, 3, dct);
+    //result.copyTo(dct);
+    return;
 }
 
 

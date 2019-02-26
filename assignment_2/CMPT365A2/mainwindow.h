@@ -44,12 +44,6 @@ private slots:
 
     void on_comboBox_currentIndexChanged(int index);
 
-    void on_ybutton_clicked();
-
-    void on_ubutton_clicked();
-
-    void on_vbutton_clicked();
-
     void on_qualitySlider_valueChanged(int value);
 
     void on_convert2rgb_clicked();
