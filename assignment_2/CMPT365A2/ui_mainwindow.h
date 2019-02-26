@@ -42,6 +42,7 @@ public:
     QVBoxLayout *verticalLayout;
     QPushButton *load;
     QPushButton *convert;
+    QPushButton *dct;
     QGridLayout *gridLayout;
     QLabel *subsampling_label;
     QComboBox *comboBox;
@@ -105,6 +106,11 @@ public:
         convert->setObjectName(QStringLiteral("convert"));
 
         verticalLayout->addWidget(convert);
+
+        dct = new QPushButton(centralWidget);
+        dct->setObjectName(QStringLiteral("dct"));
+
+        verticalLayout->addWidget(dct);
 
         gridLayout = new QGridLayout();
         gridLayout->setSpacing(0);
@@ -258,6 +264,7 @@ public:
         img1->setText(QString());
         load->setText(QApplication::translate("MainWindow", "Load", Q_NULLPTR));
         convert->setText(QApplication::translate("MainWindow", "Convert", Q_NULLPTR));
+        dct->setText(QApplication::translate("MainWindow", "Discrete Cosine Transform", Q_NULLPTR));
         subsampling_label->setText(QApplication::translate("MainWindow", "Croma Subsampling", Q_NULLPTR));
         comboBox->clear();
         comboBox->insertItems(0, QStringList()

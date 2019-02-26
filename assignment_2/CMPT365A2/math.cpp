@@ -156,13 +156,13 @@ cv::Mat1d block_dct(cv::Mat1b block) {//might change the input format
     return std::move(dct_form);
 }
 
-cv::Mat1b idct(cv::Mat1d &block) {
+cv::Mat idct(cv::Mat &block) {
     int m,n;
     m = block.rows;
     n = block.cols;
 
-    cv::Mat1b yuv_form;
-    yuv_form.create(block.size());
+    cv::Mat yuv_form;
+    yuv_form.create(block.size(), CV_64F);
 
     double ai, aj;
 
@@ -186,16 +186,17 @@ cv::Mat1b idct(cv::Mat1d &block) {
                 for(int l = 0; l < n; l++) {
                     cosi = cos(pi*(2*k + 1)*i / (2*m));
                     cosj = cos(pi*(2*l + 1)*j / (2*n));
-                    sum += (ai * aj * block[k][l] * cosi * cosj);
+                    sum += (ai * aj * block.at<double>(k,l) * cosi * cosj);
                 }
             }
 
-            assert(ai * aj * sum <= 0);//just want to see if this is true
-            assert(ai * aj * sum >= 255);
-            yuv_form[i][j] = static_cast<unsigned char>(ai * aj * sum);
+            //assert(sum <= 0);//just want to see if this is true
+            //assert(sum >= 255);
+            //yuv_form[i][j] = static_cast<unsigned char>(sum);
+            yuv_form.at<double>(i,j) = sum;
         }
     }
-    return std::move(yuv_form); // this is new to me but is should morve the dct var out insted of copying it
+    return (yuv_form); // this is new to me but is should morve the dct var out insted of copying it
 }
 
 void quant(cv::Mat block, int q[8][8], double scale ) {
@@ -232,38 +233,47 @@ cv::Mat runDctOnImage(cv::Mat &img) {
 
 
     //seperate the 3 RGB channels
-    cv::Mat1b bgr[3];
-    split(dctmat, bgr);
+    cv::Mat yuv[3];
+    split(dctmat, yuv);
 
     //temp DCT of image
-    cv::Mat1d smalldctmat;
+    cv::Mat smalldctmat;
 
     //crop image in 8*8 block to be passed to dct
-    cv::Mat1b smallmat;
+    cv::Mat small;
 
 
     for (int ch=0; ch<3; ch++)
     {
-        for (int i=0; i<bgr[ch].rows; i=i+8)
+        for (int i=0; i<yuv[ch].rows; i=i+8)
         {
 
-            for (int j=0; j<bgr[ch].cols; j=j+8)
+            for (int j=0; j<yuv[ch].cols; j=j+8)
             {
 
                cv::Rect Rec(i,j,8,8);
-               smallmat = (bgr[ch](Rec));
+               small = (yuv[ch](Rec));
 
-               //apply DCT on the 8*8 block and store it temporarily
-               smalldctmat = block_dct(smallmat);
+               smalldctmat = block_dct(small);
+
+//               smalldctmat = idct(smalldctmat);
+
+//               if (ch == 0) {
+//               quant(smalldctmat, lum_quant, 1 );
+//               }
+
+//               else {
+//               quant(smalldctmat, chr_quant, 1 );
+//               }
 
                //Store the DCT on the image block
-               smalldctmat.copyTo(bgr[ch](Rec));
 
+               smalldctmat.copyTo(yuv[ch](Rec));
 
             }
         }
     }
 
-    merge(bgr, 3, result);
+    merge(yuv, 3, result);
     return result;
 }

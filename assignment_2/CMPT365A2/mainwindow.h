@@ -46,6 +46,8 @@ private slots:
 
     void on_comboBox_currentIndexChanged(int index);
 
+    void on_dct_clicked();
+
 private:
     QImage MatRGB2QImage(const cv::Mat3b &src);
     QImage MatGrayScale2QImage(const cv::Mat_<double> &src);

@@ -9,6 +9,9 @@
 //########
 //UNTESTED
 //########
+
+
+//y
 static int lum_quant[8][8] = {
         {16, 11, 10, 16, 24, 40, 51, 61},
         {12, 12, 14, 19, 26, 58, 60, 55},
@@ -20,6 +23,7 @@ static int lum_quant[8][8] = {
         {72, 92, 95, 98,112,100,103, 99}
         };
 
+//uv
 static int chr_quant[8][8] = {
         {17,18,24,47,99,99,99,99},
         {18,21,26,66,99,99,99,99},
@@ -31,11 +35,16 @@ static int chr_quant[8][8] = {
         {99,99,99,99,99,99,99,99}
         };
 
+static int uniform_quant[8][8] = {
+
+};
+
+
 //prefroms dct on a n x m matric returns an nx m matric of ints that are the dct fourm
 cv::Mat1d block_dct(cv::Mat1b &block);
 
 //reverses the dct matrix returns in unsigned char
-cv::Mat1b idct(cv::Mat1d &block);
+cv::Mat idct(cv::Mat &block);
 
 
 // Run DCT on every 8*8 blocks in the image on everychannel and return the resulting DCT matrix in a matarray bgr[3]

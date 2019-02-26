@@ -101,6 +101,13 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="dct">
+          <property name="text">
+           <string>Discrete Cosine Transform</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <layout class="QGridLayout" name="gridLayout">
           <property name="spacing">
            <number>0</number>

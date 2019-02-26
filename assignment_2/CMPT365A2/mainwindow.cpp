@@ -117,3 +117,15 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
 
     on_convert_clicked();
 }
+
+void MainWindow::on_dct_clicked()
+{
+    if (cvImg.empty()) {
+            return;
+    }
+
+    convertedImg = runDctOnImage(cvImg);
+    QImage qImage = MatRGB2QImage(convertedImg);
+    ui->img2->setPixmap(QPixmap::fromImage(qImage));
+
+}
