@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     subsampling = cv::Vec3i(4,2,0);
     quality = 1;
+    rgb = true;
 
     ui->qualityDisplay->setText(QString::number(quality));
 
@@ -119,6 +120,7 @@ void MainWindow::on_convert_clicked()
     //std::cout<< convertedImg.type() << std::endl;
 
     rgb2yuv(convertedImg);
+    rgb = false;
     cv::Mat yuv[3];
     split(convertedImg, yuv);
 
@@ -259,4 +261,15 @@ void MainWindow::on_qualitySlider_valueChanged(int value)
         }
     }
     on_convert_clicked();
+}
+
+void MainWindow::on_convert2rgb_clicked()
+{
+    if (rgb == false) {
+    yuv2rgb(convertedImg);
+    QImage qImage = MatRGB2QImage(convertedImg);
+    ui->img2->setPixmap(QPixmap::fromImage(qImage));
+    rgb = true;
+    }
+
 }

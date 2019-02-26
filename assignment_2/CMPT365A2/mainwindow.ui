@@ -28,7 +28,7 @@
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1">
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0,1">
       <property name="spacing">
        <number>4</number>
       </property>
@@ -96,7 +96,14 @@
         <item>
          <widget class="QPushButton" name="convert">
           <property name="text">
-           <string>Convert</string>
+           <string>Convert to YUV</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="convert2rgb">
+          <property name="text">
+           <string>Conver to RGB</string>
           </property>
          </widget>
         </item>
@@ -112,20 +119,6 @@
           <property name="spacing">
            <number>0</number>
           </property>
-          <item row="3" column="5">
-           <widget class="QPushButton" name="ubutton">
-            <property name="text">
-             <string>U</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="5">
-           <widget class="QPushButton" name="ybutton">
-            <property name="text">
-             <string>Y</string>
-            </property>
-           </widget>
-          </item>
           <item row="5" column="5">
            <widget class="QComboBox" name="comboBox">
             <property name="sizePolicy">
@@ -158,10 +151,10 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="5">
-           <widget class="QPushButton" name="vbutton">
+          <item row="3" column="5">
+           <widget class="QPushButton" name="ubutton">
             <property name="text">
-             <string>V</string>
+             <string>U</string>
             </property>
            </widget>
           </item>
@@ -179,6 +172,20 @@
             </property>
             <property name="readOnly">
              <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="5">
+           <widget class="QPushButton" name="vbutton">
+            <property name="text">
+             <string>V</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="5">
+           <widget class="QPushButton" name="ybutton">
+            <property name="text">
+             <string>Y</string>
             </property>
            </widget>
           </item>
@@ -227,7 +234,7 @@
              </size>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="tab_1">
              <attribute name="title">
@@ -238,7 +245,7 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>329</width>
+                <width>322</width>
                 <height>322</height>
                </rect>
               </property>

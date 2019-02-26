@@ -56,6 +56,8 @@ private slots:
 
     void on_qualitySlider_valueChanged(int value);
 
+    void on_convert2rgb_clicked();
+
 private:
     QImage MatRGB2QImage(const cv::Mat3b &src);
     QImage MatGrayScale2QImage(const cv::Mat_<double> &src);
@@ -69,6 +71,7 @@ private:
     Mat cvImg, convertedImg;
     cv::Vec3i subsampling;
     double quality;
+    bool rgb;
 
 };
 
