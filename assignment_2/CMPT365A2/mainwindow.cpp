@@ -101,6 +101,7 @@ void MainWindow::on_load_clicked()
 
     //resize the loaded image to have column and row that are multiple of 8;
     resize8x8(cvImg);
+    //resize8x8(cvImg);
 
     QImage qImage = MatRGB2QImage(cvImg);
     ui->img1->setPixmap(QPixmap::fromImage(qImage));
@@ -114,9 +115,10 @@ void MainWindow::on_convert_clicked()
     }
     convertedImg.create(cvImg.size(), CV_8UC3);
     cvImg.copyTo(convertedImg);
-    std::cout<< convertedImg.type() << std::endl;
-    rgb2yuv(convertedImg);
 
+    //std::cout<< convertedImg.type() << std::endl;
+
+    rgb2yuv(convertedImg);
     cv::Mat yuv[3];
     split(convertedImg, yuv);
 
@@ -124,7 +126,7 @@ void MainWindow::on_convert_clicked()
 
     convertedImg = runDctOnImage(convertedImg, quality);
 
-    yuv2rgb(convertedImg);
+    //yuv2rgb(convertedImg);
     QImage qImage = MatRGB2QImage(convertedImg);
     ui->img2->setPixmap(QPixmap::fromImage(qImage));
 
