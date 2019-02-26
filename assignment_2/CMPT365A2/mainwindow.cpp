@@ -14,18 +14,36 @@ MainWindow::MainWindow(QWidget *parent) :
     init_dct();
 
     subsampling = cv::Vec3i(4,2,0);
+    quality = 1;
+
+    ui->qualityDisplay->setText(QString::number(quality));
 
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
             //
-            QTableWidgetItem *pCell = ui->quantDisplay->item(i, j);
+            QTableWidgetItem *pCell = ui->quantDisplay_chr->item(i, j);
             if(!pCell)
             {
                 pCell = new QTableWidgetItem;
-                ui->quantDisplay->setItem(i, j, pCell);
+                ui->quantDisplay_chr->setItem(i, j, pCell);
             }
 
-            ui->quantDisplay->item(i,j)->setText(QString::number(lum_quant[i][j]));
+            ui->quantDisplay_chr->item(i,j)->setText(QString::number(chr_quant[i][j]));
+
+        }
+    }
+
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            //
+            QTableWidgetItem *pCell = ui->quantDisplay_lum->item(i, j);
+            if(!pCell)
+            {
+                pCell = new QTableWidgetItem;
+                ui->quantDisplay_lum->setItem(i, j, pCell);
+            }
+
+            ui->quantDisplay_lum->item(i,j)->setText(QString::number(lum_quant[i][j]));
 
         }
     }
@@ -104,7 +122,7 @@ void MainWindow::on_convert_clicked()
 
     chroma_subsample(convertedImg, subsampling[0], subsampling[1], subsampling[2]);
 
-    convertedImg = runDctOnImage(convertedImg);
+    convertedImg = runDctOnImage(convertedImg, quality);
 
     yuv2rgb(convertedImg);
     QImage qImage = MatRGB2QImage(convertedImg);
@@ -140,7 +158,7 @@ void MainWindow::on_dct_clicked()
     convertedImg.create(cvImg.size(), CV_8UC3);
     cvImg.copyTo(convertedImg);
 
-    convertedImg = runDctOnImage(convertedImg);
+    convertedImg = runDctOnImage(convertedImg, quality);
 
     QImage qImage = MatRGB2QImage(convertedImg);
     ui->img2->setPixmap(QPixmap::fromImage(qImage));
@@ -200,4 +218,43 @@ void MainWindow::on_vbutton_clicked()
 
     QImage qImage = MatGrayScale2QImage(yuv[2]);
     ui->img2->setPixmap(QPixmap::fromImage(qImage));
+}
+
+void MainWindow::on_qualitySlider_valueChanged(int value)
+{
+    std::cout << value << std::endl;
+    quality = value/(double)10;
+    ui->qualityDisplay->setText(QString::number(quality));
+
+    ui->qualityDisplay->setText(QString::number(quality));
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            //
+            QTableWidgetItem *pCell = ui->quantDisplay_chr->item(i, j);
+            if(!pCell)
+            {
+                pCell = new QTableWidgetItem;
+                ui->quantDisplay_chr->setItem(i, j, pCell);
+            }
+
+            ui->quantDisplay_chr->item(i,j)->setText(QString::number(chr_quant[i][j]* quality));
+
+        }
+    }
+
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            //
+            QTableWidgetItem *pCell = ui->quantDisplay_lum->item(i, j);
+            if(!pCell)
+            {
+                pCell = new QTableWidgetItem;
+                ui->quantDisplay_lum->setItem(i, j, pCell);
+            }
+
+            ui->quantDisplay_lum->item(i,j)->setText(QString::number(lum_quant[i][j] * quality));
+
+        }
+    }
+    on_convert_clicked();
 }

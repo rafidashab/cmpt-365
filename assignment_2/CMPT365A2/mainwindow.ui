@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1034</width>
-    <height>540</height>
+    <width>1094</width>
+    <height>894</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -112,6 +112,20 @@
           <property name="spacing">
            <number>0</number>
           </property>
+          <item row="3" column="5">
+           <widget class="QPushButton" name="ubutton">
+            <property name="text">
+             <string>U</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="5">
+           <widget class="QPushButton" name="ybutton">
+            <property name="text">
+             <string>Y</string>
+            </property>
+           </widget>
+          </item>
           <item row="5" column="5">
            <widget class="QComboBox" name="comboBox">
             <property name="sizePolicy">
@@ -137,24 +151,10 @@
             </item>
            </widget>
           </item>
-          <item row="2" column="5">
-           <widget class="QPushButton" name="ybutton">
-            <property name="text">
-             <string>Y</string>
-            </property>
-           </widget>
-          </item>
           <item row="5" column="4">
            <widget class="QLabel" name="subsampling_label">
             <property name="text">
              <string>Croma Subsampling</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="5">
-           <widget class="QPushButton" name="ubutton">
-            <property name="text">
-             <string>U</string>
             </property>
            </widget>
           </item>
@@ -165,7 +165,43 @@
             </property>
            </widget>
           </item>
+          <item row="6" column="4">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Quality (Quantization scale):</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="5">
+           <widget class="QLineEdit" name="qualityDisplay">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QSlider" name="qualitySlider">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>100</number>
+          </property>
+          <property name="pageStep">
+           <number>10</number>
+          </property>
+          <property name="sliderPosition">
+           <number>50</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -183,147 +219,326 @@
            </spacer>
           </item>
           <item>
-           <widget class="QTableWidget" name="quantDisplay">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
+           <widget class="QTabWidget" name="tabWidget">
             <property name="minimumSize">
              <size>
-              <width>261</width>
-              <height>261</height>
+              <width>325</width>
+              <height>352</height>
              </size>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>500</width>
-              <height>500</height>
-             </size>
+            <property name="currentIndex">
+             <number>0</number>
             </property>
-            <property name="iconSize">
-             <size>
-              <width>32</width>
-              <height>32</height>
-             </size>
-            </property>
-            <attribute name="horizontalHeaderVisible">
-             <bool>false</bool>
-            </attribute>
-            <attribute name="horizontalHeaderDefaultSectionSize">
-             <number>32</number>
-            </attribute>
-            <attribute name="horizontalHeaderHighlightSections">
-             <bool>false</bool>
-            </attribute>
-            <attribute name="horizontalHeaderMinimumSectionSize">
-             <number>32</number>
-            </attribute>
-            <attribute name="verticalHeaderVisible">
-             <bool>false</bool>
-            </attribute>
-            <attribute name="verticalHeaderDefaultSectionSize">
-             <number>32</number>
-            </attribute>
-            <attribute name="verticalHeaderMinimumSectionSize">
-             <number>32</number>
-            </attribute>
-            <row>
-             <property name="text">
-              <string>0</string>
-             </property>
-            </row>
-            <row>
-             <property name="text">
-              <string>1</string>
-             </property>
-            </row>
-            <row>
-             <property name="text">
-              <string>2</string>
-             </property>
-            </row>
-            <row>
-             <property name="text">
-              <string>3</string>
-             </property>
-            </row>
-            <row>
-             <property name="text">
-              <string>4</string>
-             </property>
-            </row>
-            <row>
-             <property name="text">
-              <string>5</string>
-             </property>
-            </row>
-            <row>
-             <property name="text">
-              <string>6</string>
-             </property>
-            </row>
-            <row>
-             <property name="text">
-              <string>7</string>
-             </property>
-            </row>
-            <column>
-             <property name="text">
-              <string>0</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>1</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>2</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>3</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>4</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>5</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>6</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>7</string>
-             </property>
-            </column>
-            <item row="0" column="0">
-             <property name="text">
-              <string>123</string>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-            </item>
-            <item row="1" column="0">
-             <property name="text">
-              <string>21</string>
-             </property>
-            </item>
+            <widget class="QWidget" name="tab_1">
+             <attribute name="title">
+              <string>Y Qunatization</string>
+             </attribute>
+             <widget class="QTableWidget" name="quantDisplay_lum">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>329</width>
+                <height>322</height>
+               </rect>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>322</width>
+                <height>322</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>322</width>
+                <height>322</height>
+               </size>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>46</width>
+                <height>46</height>
+               </size>
+              </property>
+              <attribute name="horizontalHeaderVisible">
+               <bool>false</bool>
+              </attribute>
+              <attribute name="horizontalHeaderDefaultSectionSize">
+               <number>40</number>
+              </attribute>
+              <attribute name="horizontalHeaderHighlightSections">
+               <bool>false</bool>
+              </attribute>
+              <attribute name="horizontalHeaderMinimumSectionSize">
+               <number>40</number>
+              </attribute>
+              <attribute name="verticalHeaderVisible">
+               <bool>false</bool>
+              </attribute>
+              <attribute name="verticalHeaderDefaultSectionSize">
+               <number>40</number>
+              </attribute>
+              <attribute name="verticalHeaderMinimumSectionSize">
+               <number>40</number>
+              </attribute>
+              <row>
+               <property name="text">
+                <string>0</string>
+               </property>
+              </row>
+              <row>
+               <property name="text">
+                <string>1</string>
+               </property>
+              </row>
+              <row>
+               <property name="text">
+                <string>2</string>
+               </property>
+              </row>
+              <row>
+               <property name="text">
+                <string>3</string>
+               </property>
+              </row>
+              <row>
+               <property name="text">
+                <string>4</string>
+               </property>
+              </row>
+              <row>
+               <property name="text">
+                <string>5</string>
+               </property>
+              </row>
+              <row>
+               <property name="text">
+                <string>6</string>
+               </property>
+              </row>
+              <row>
+               <property name="text">
+                <string>7</string>
+               </property>
+              </row>
+              <column>
+               <property name="text">
+                <string>0</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>1</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>2</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>3</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>4</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>5</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>6</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>7</string>
+               </property>
+              </column>
+              <item row="0" column="0">
+               <property name="text">
+                <string>123</string>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </item>
+              <item row="1" column="0">
+               <property name="text">
+                <string>21</string>
+               </property>
+              </item>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="tab_2">
+             <attribute name="title">
+              <string>UV Qunatization</string>
+             </attribute>
+             <widget class="QTableWidget" name="quantDisplay_chr">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>322</width>
+                <height>322</height>
+               </rect>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>322</width>
+                <height>322</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>322</width>
+                <height>322</height>
+               </size>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>46</width>
+                <height>46</height>
+               </size>
+              </property>
+              <attribute name="horizontalHeaderVisible">
+               <bool>false</bool>
+              </attribute>
+              <attribute name="horizontalHeaderDefaultSectionSize">
+               <number>40</number>
+              </attribute>
+              <attribute name="horizontalHeaderHighlightSections">
+               <bool>false</bool>
+              </attribute>
+              <attribute name="horizontalHeaderMinimumSectionSize">
+               <number>40</number>
+              </attribute>
+              <attribute name="verticalHeaderVisible">
+               <bool>false</bool>
+              </attribute>
+              <attribute name="verticalHeaderDefaultSectionSize">
+               <number>40</number>
+              </attribute>
+              <attribute name="verticalHeaderMinimumSectionSize">
+               <number>40</number>
+              </attribute>
+              <row>
+               <property name="text">
+                <string>0</string>
+               </property>
+              </row>
+              <row>
+               <property name="text">
+                <string>1</string>
+               </property>
+              </row>
+              <row>
+               <property name="text">
+                <string>2</string>
+               </property>
+              </row>
+              <row>
+               <property name="text">
+                <string>3</string>
+               </property>
+              </row>
+              <row>
+               <property name="text">
+                <string>4</string>
+               </property>
+              </row>
+              <row>
+               <property name="text">
+                <string>5</string>
+               </property>
+              </row>
+              <row>
+               <property name="text">
+                <string>6</string>
+               </property>
+              </row>
+              <row>
+               <property name="text">
+                <string>7</string>
+               </property>
+              </row>
+              <column>
+               <property name="text">
+                <string>0</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>1</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>2</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>3</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>4</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>5</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>6</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>7</string>
+               </property>
+              </column>
+              <item row="0" column="0">
+               <property name="text">
+                <string>123</string>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </item>
+              <item row="1" column="0">
+               <property name="text">
+                <string>21</string>
+               </property>
+              </item>
+             </widget>
+            </widget>
            </widget>
           </item>
           <item>
@@ -399,7 +614,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1034</width>
+     <width>1094</width>
      <height>22</height>
     </rect>
    </property>

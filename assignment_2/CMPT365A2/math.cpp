@@ -234,7 +234,7 @@ void resize8x8(cv::Mat &img) {
     resize(img,img,size); //Resize the image to be have rows and coloums that are multiple of 8
 }
 
-cv::Mat runDctOnImage(cv::Mat &img) {
+cv::Mat runDctOnImage(cv::Mat &img, double quality) {
 
     //copy the imput image to a new matrix
     cv::Mat dctmat;
@@ -269,13 +269,13 @@ cv::Mat runDctOnImage(cv::Mat &img) {
                smalldctmat = dct88(small);
 
                if (ch == 0) {
-                   quant(smalldctmat, lum_quant, 1 );
-                   iquant(smalldctmat, lum_quant, 1 );
+                   quant(smalldctmat, lum_quant, quality );
+                   iquant(smalldctmat, lum_quant, quality );
                }
 
                else {
-                   quant(smalldctmat, chr_quant, 1 );
-                   iquant(smalldctmat, chr_quant, 1 );
+                   quant(smalldctmat, chr_quant, quality );
+                   iquant(smalldctmat, chr_quant, quality );
                }
               smalldctmat = idct88(smalldctmat);
               //Store the DCT on the image block
