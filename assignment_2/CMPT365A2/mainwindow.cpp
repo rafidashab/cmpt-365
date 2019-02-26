@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     subsampling = cv::Vec3i(4,2,0);
     quality = 1;
     rgb = true;
-
+    enableQuant = true;
     ui->qualityDisplay->setText(QString::number(quality));
 
     for (int i = 0; i < 8; i++) {
@@ -91,8 +91,6 @@ QImage MainWindow::MatGrayScale2QImage(const cv::Mat_<double> &src)
 }
 
 
-
-
 void MainWindow::on_load_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
@@ -116,28 +114,42 @@ void MainWindow::on_convert_clicked()
     }
     convertedImg.create(cvImg.size(), CV_8UC3);
     cvImg.copyTo(convertedImg);
-
+    QImage qImage;
     //std::cout<< convertedImg.type() << std::endl;
 
     rgb2yuv(convertedImg);
+
+
+    chroma_subsample(convertedImg, subsampling[0], subsampling[1], subsampling[2]);
+    cv::Mat tmp;
+    tmp = runDctOnImage(convertedImg, quality, enableQuant);
+
+    qImage = MatRGB2QImage(tmp);
+    ui->imgDCT->setPixmap(QPixmap::fromImage(qImage));
+
+    convertedImg = runiDctOnImage(tmp, quality, enableQuant);
+
     rgb = false;
     cv::Mat yuv[3];
     split(convertedImg, yuv);
+    qImage = MatGrayScale2QImage(yuv[0]);
+    ui->imgY->setPixmap(QPixmap::fromImage(qImage));
+    qImage = MatGrayScale2QImage(yuv[1]);
+    ui->imgU->setPixmap(QPixmap::fromImage(qImage));
+    qImage = MatGrayScale2QImage(yuv[2]);
+    ui->imgV->setPixmap(QPixmap::fromImage(qImage));
 
-    chroma_subsample(convertedImg, subsampling[0], subsampling[1], subsampling[2]);
+    yuv2rgb(convertedImg);
+    rgb = true;
+    //on_convert2rgb_clicked(); // back to rg
 
-    convertedImg = runDctOnImage(convertedImg, quality);
-
-    //yuv2rgb(convertedImg);
-    QImage qImage = MatRGB2QImage(convertedImg);
+    qImage = MatRGB2QImage(convertedImg);//output
     ui->img2->setPixmap(QPixmap::fromImage(qImage));
 
-    //ui->quantDisplay->setItem(2,2,)
 
 }
 
-void MainWindow::on_comboBox_currentIndexChanged(int index)
-{
+void MainWindow::on_comboBox_currentIndexChanged(int index) {
     switch (index) {
     case 0:
         subsampling = cv::Vec3i(4,2,0);
@@ -151,41 +163,6 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
     }
 
     on_convert_clicked();
-}
-
-void MainWindow::on_dct_clicked()
-{
-    if (cvImg.empty()) {
-            return;
-    }
-
-    convertedImg.create(cvImg.size(), CV_8UC3);
-    cvImg.copyTo(convertedImg);
-
-    convertedImg = runDctOnImage(convertedImg, quality);
-
-    QImage qImage = MatRGB2QImage(convertedImg);
-    ui->img2->setPixmap(QPixmap::fromImage(qImage));
-
-    //    cv::Mat test;
-    //    test.create()
-
-    //    for (int i = 0; i < 8; i++) {
-    //        for (int j = 0; j < 8; j++) {
-    //            //
-    //            QTableWidgetItem *pCell = ui->quantDisplay->item(i, j);
-    //            if(!pCell)
-    //            {
-    //                pCell = new QTableWidgetItem;
-    //                ui->quantDisplay->setItem(i, j, pCell);
-    //            }
-
-    //            ui->quantDisplay->item(i,j)->setText(QString::number(lum_quant[i][j]));
-
-//    //        }
-
-//    }
-
 }
 
 void MainWindow::on_ybutton_clicked()
@@ -210,8 +187,6 @@ void MainWindow::on_ubutton_clicked()
     QImage qImage = MatGrayScale2QImage(yuv[1]);
     ui->img2->setPixmap(QPixmap::fromImage(qImage));
 }
-
-
 
 void MainWindow::on_vbutton_clicked()
 {
@@ -272,4 +247,10 @@ void MainWindow::on_convert2rgb_clicked()
     rgb = true;
     }
 
+}
+
+void MainWindow::on_enableQuant_toggled(bool checked)
+{
+    enableQuant = checked;
+    on_convert_clicked();
 }

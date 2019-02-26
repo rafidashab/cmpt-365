@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.9.5
+** Created by: Qt User Interface Compiler version 5.11.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -12,7 +12,6 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
@@ -23,6 +22,8 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
@@ -40,21 +41,16 @@ public:
     QAction *actionQuit;
     QWidget *centralWidget;
     QGridLayout *gridLayout_2;
-    QHBoxLayout *horizontalLayout;
-    QLabel *img1;
     QVBoxLayout *verticalLayout;
-    QPushButton *load;
-    QPushButton *convert;
     QPushButton *convert2rgb;
-    QPushButton *dct;
     QGridLayout *gridLayout;
-    QComboBox *comboBox;
-    QLabel *subsampling_label;
-    QPushButton *ubutton;
-    QLabel *label;
+    QPushButton *convert;
     QLineEdit *qualityDisplay;
-    QPushButton *vbutton;
-    QPushButton *ybutton;
+    QLabel *subsampling_label;
+    QLabel *label;
+    QPushButton *load;
+    QComboBox *comboBox;
+    QRadioButton *enableQuant;
     QSlider *qualitySlider;
     QHBoxLayout *horizontalLayout_2;
     QSpacerItem *horizontalSpacer_2;
@@ -65,6 +61,37 @@ public:
     QTableWidget *quantDisplay_chr;
     QSpacerItem *horizontalSpacer;
     QSpacerItem *verticalSpacer;
+    QTabWidget *displayTabs;
+    QWidget *original;
+    QScrollArea *scrollArea_tabs;
+    QWidget *scrollAreaWidgetContents_2;
+    QGridLayout *gridLayout_5;
+    QLabel *img1;
+    QWidget *tabY;
+    QGridLayout *gridLayout_3;
+    QScrollArea *scrollArea;
+    QWidget *scrollAreaWidgetContents;
+    QGridLayout *gridLayout_4;
+    QLabel *imgY;
+    QWidget *tabU;
+    QScrollArea *scrollArea_2;
+    QWidget *scrollAreaWidgetContents_6;
+    QGridLayout *gridLayout_10;
+    QLabel *imgU;
+    QWidget *tabV;
+    QScrollArea *scrollArea_5;
+    QWidget *scrollAreaWidgetContents_7;
+    QGridLayout *gridLayout_11;
+    QLabel *imgV;
+    QWidget *dct;
+    QScrollArea *scrollArea_tabs_3;
+    QWidget *scrollAreaWidgetContents_8;
+    QGridLayout *gridLayout_12;
+    QLabel *imgDCT;
+    QWidget *output;
+    QScrollArea *scrollArea_tabs_2;
+    QWidget *scrollAreaWidgetContents_5;
+    QGridLayout *gridLayout_9;
     QLabel *img2;
     QMenuBar *menuBar;
     QMenu *menuFile;
@@ -75,7 +102,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1094, 894);
+        MainWindow->resize(1208, 624);
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -91,103 +118,82 @@ public:
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(4);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        horizontalLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
-        horizontalLayout->setContentsMargins(4, 4, 4, 4);
-        img1 = new QLabel(centralWidget);
-        img1->setObjectName(QStringLiteral("img1"));
-        sizePolicy.setHeightForWidth(img1->sizePolicy().hasHeightForWidth());
-        img1->setSizePolicy(sizePolicy);
-        img1->setMinimumSize(QSize(128, 128));
-        img1->setMaximumSize(QSize(512, 512));
-        img1->setSizeIncrement(QSize(1, 1));
-        img1->setAutoFillBackground(false);
-        img1->setScaledContents(true);
-
-        horizontalLayout->addWidget(img1);
-
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        load = new QPushButton(centralWidget);
-        load->setObjectName(QStringLiteral("load"));
-
-        verticalLayout->addWidget(load);
-
-        convert = new QPushButton(centralWidget);
-        convert->setObjectName(QStringLiteral("convert"));
-
-        verticalLayout->addWidget(convert);
-
         convert2rgb = new QPushButton(centralWidget);
         convert2rgb->setObjectName(QStringLiteral("convert2rgb"));
 
         verticalLayout->addWidget(convert2rgb);
 
-        dct = new QPushButton(centralWidget);
-        dct->setObjectName(QStringLiteral("dct"));
-
-        verticalLayout->addWidget(dct);
-
         gridLayout = new QGridLayout();
         gridLayout->setSpacing(0);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        comboBox = new QComboBox(centralWidget);
-        comboBox->setObjectName(QStringLiteral("comboBox"));
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        convert = new QPushButton(centralWidget);
+        convert->setObjectName(QStringLiteral("convert"));
+
+        gridLayout->addWidget(convert, 3, 5, 1, 1);
+
+        qualityDisplay = new QLineEdit(centralWidget);
+        qualityDisplay->setObjectName(QStringLiteral("qualityDisplay"));
+        qualityDisplay->setEnabled(true);
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(comboBox->sizePolicy().hasHeightForWidth());
-        comboBox->setSizePolicy(sizePolicy1);
+        sizePolicy1.setHeightForWidth(qualityDisplay->sizePolicy().hasHeightForWidth());
+        qualityDisplay->setSizePolicy(sizePolicy1);
+        qualityDisplay->setReadOnly(true);
 
-        gridLayout->addWidget(comboBox, 5, 5, 1, 1);
+        gridLayout->addWidget(qualityDisplay, 6, 5, 1, 1);
 
         subsampling_label = new QLabel(centralWidget);
         subsampling_label->setObjectName(QStringLiteral("subsampling_label"));
 
         gridLayout->addWidget(subsampling_label, 5, 4, 1, 1);
 
-        ubutton = new QPushButton(centralWidget);
-        ubutton->setObjectName(QStringLiteral("ubutton"));
-
-        gridLayout->addWidget(ubutton, 3, 5, 1, 1);
-
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
 
         gridLayout->addWidget(label, 6, 4, 1, 1);
 
-        qualityDisplay = new QLineEdit(centralWidget);
-        qualityDisplay->setObjectName(QStringLiteral("qualityDisplay"));
-        qualityDisplay->setEnabled(true);
-        qualityDisplay->setReadOnly(true);
+        load = new QPushButton(centralWidget);
+        load->setObjectName(QStringLiteral("load"));
 
-        gridLayout->addWidget(qualityDisplay, 6, 5, 1, 1);
+        gridLayout->addWidget(load, 3, 4, 1, 1);
 
-        vbutton = new QPushButton(centralWidget);
-        vbutton->setObjectName(QStringLiteral("vbutton"));
+        comboBox = new QComboBox(centralWidget);
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->setObjectName(QStringLiteral("comboBox"));
+        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(comboBox->sizePolicy().hasHeightForWidth());
+        comboBox->setSizePolicy(sizePolicy2);
 
-        gridLayout->addWidget(vbutton, 4, 5, 1, 1);
+        gridLayout->addWidget(comboBox, 5, 5, 1, 1);
 
-        ybutton = new QPushButton(centralWidget);
-        ybutton->setObjectName(QStringLiteral("ybutton"));
+        enableQuant = new QRadioButton(centralWidget);
+        enableQuant->setObjectName(QStringLiteral("enableQuant"));
+        enableQuant->setChecked(true);
 
-        gridLayout->addWidget(ybutton, 2, 5, 1, 1);
-
-
-        verticalLayout->addLayout(gridLayout);
+        gridLayout->addWidget(enableQuant, 7, 4, 1, 1);
 
         qualitySlider = new QSlider(centralWidget);
         qualitySlider->setObjectName(QStringLiteral("qualitySlider"));
+        sizePolicy1.setHeightForWidth(qualitySlider->sizePolicy().hasHeightForWidth());
+        qualitySlider->setSizePolicy(sizePolicy1);
         qualitySlider->setMinimum(1);
         qualitySlider->setMaximum(100);
         qualitySlider->setPageStep(10);
         qualitySlider->setSliderPosition(50);
         qualitySlider->setOrientation(Qt::Horizontal);
 
-        verticalLayout->addWidget(qualitySlider);
+        gridLayout->addWidget(qualitySlider, 7, 5, 1, 1);
+
+
+        verticalLayout->addLayout(gridLayout);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
@@ -247,11 +253,11 @@ public:
         quantDisplay_lum->setItem(1, 0, __qtablewidgetitem17);
         quantDisplay_lum->setObjectName(QStringLiteral("quantDisplay_lum"));
         quantDisplay_lum->setGeometry(QRect(0, 0, 322, 322));
-        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Minimum);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(quantDisplay_lum->sizePolicy().hasHeightForWidth());
-        quantDisplay_lum->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy3(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(quantDisplay_lum->sizePolicy().hasHeightForWidth());
+        quantDisplay_lum->setSizePolicy(sizePolicy3);
         quantDisplay_lum->setMinimumSize(QSize(322, 322));
         quantDisplay_lum->setMaximumSize(QSize(322, 322));
         quantDisplay_lum->setIconSize(QSize(46, 46));
@@ -309,8 +315,8 @@ public:
         quantDisplay_chr->setItem(1, 0, __qtablewidgetitem35);
         quantDisplay_chr->setObjectName(QStringLiteral("quantDisplay_chr"));
         quantDisplay_chr->setGeometry(QRect(0, 0, 322, 322));
-        sizePolicy2.setHeightForWidth(quantDisplay_chr->sizePolicy().hasHeightForWidth());
-        quantDisplay_chr->setSizePolicy(sizePolicy2);
+        sizePolicy3.setHeightForWidth(quantDisplay_chr->sizePolicy().hasHeightForWidth());
+        quantDisplay_chr->setSizePolicy(sizePolicy3);
         quantDisplay_chr->setMinimumSize(QSize(322, 322));
         quantDisplay_chr->setMaximumSize(QSize(322, 322));
         quantDisplay_chr->setIconSize(QSize(46, 46));
@@ -337,28 +343,167 @@ public:
         verticalLayout->addItem(verticalSpacer);
 
 
-        horizontalLayout->addLayout(verticalLayout);
+        gridLayout_2->addLayout(verticalLayout, 1, 0, 1, 1);
 
-        img2 = new QLabel(centralWidget);
+        displayTabs = new QTabWidget(centralWidget);
+        displayTabs->setObjectName(QStringLiteral("displayTabs"));
+        QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(displayTabs->sizePolicy().hasHeightForWidth());
+        displayTabs->setSizePolicy(sizePolicy4);
+        displayTabs->setMinimumSize(QSize(0, 300));
+        original = new QWidget();
+        original->setObjectName(QStringLiteral("original"));
+        scrollArea_tabs = new QScrollArea(original);
+        scrollArea_tabs->setObjectName(QStringLiteral("scrollArea_tabs"));
+        scrollArea_tabs->setGeometry(QRect(0, 0, 581, 511));
+        scrollArea_tabs->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+        scrollArea_tabs->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+        scrollArea_tabs->setWidgetResizable(true);
+        scrollAreaWidgetContents_2 = new QWidget();
+        scrollAreaWidgetContents_2->setObjectName(QStringLiteral("scrollAreaWidgetContents_2"));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 565, 495));
+        gridLayout_5 = new QGridLayout(scrollAreaWidgetContents_2);
+        gridLayout_5->setSpacing(6);
+        gridLayout_5->setContentsMargins(11, 11, 11, 11);
+        gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
+        img1 = new QLabel(scrollAreaWidgetContents_2);
+        img1->setObjectName(QStringLiteral("img1"));
+        img1->setScaledContents(true);
+
+        gridLayout_5->addWidget(img1, 0, 0, 1, 1);
+
+        scrollArea_tabs->setWidget(scrollAreaWidgetContents_2);
+        displayTabs->addTab(original, QString());
+        tabY = new QWidget();
+        tabY->setObjectName(QStringLiteral("tabY"));
+        gridLayout_3 = new QGridLayout(tabY);
+        gridLayout_3->setSpacing(6);
+        gridLayout_3->setContentsMargins(11, 11, 11, 11);
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
+        scrollArea = new QScrollArea(tabY);
+        scrollArea->setObjectName(QStringLiteral("scrollArea"));
+        scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+        scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+        scrollArea->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 554, 480));
+        gridLayout_4 = new QGridLayout(scrollAreaWidgetContents);
+        gridLayout_4->setSpacing(6);
+        gridLayout_4->setContentsMargins(11, 11, 11, 11);
+        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
+        imgY = new QLabel(scrollAreaWidgetContents);
+        imgY->setObjectName(QStringLiteral("imgY"));
+        imgY->setScaledContents(true);
+
+        gridLayout_4->addWidget(imgY, 0, 0, 1, 1);
+
+        scrollArea->setWidget(scrollAreaWidgetContents);
+
+        gridLayout_3->addWidget(scrollArea, 0, 0, 1, 1);
+
+        displayTabs->addTab(tabY, QString());
+        tabU = new QWidget();
+        tabU->setObjectName(QStringLiteral("tabU"));
+        scrollArea_2 = new QScrollArea(tabU);
+        scrollArea_2->setObjectName(QStringLiteral("scrollArea_2"));
+        scrollArea_2->setGeometry(QRect(0, 0, 570, 496));
+        scrollArea_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+        scrollArea_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+        scrollArea_2->setWidgetResizable(true);
+        scrollAreaWidgetContents_6 = new QWidget();
+        scrollAreaWidgetContents_6->setObjectName(QStringLiteral("scrollAreaWidgetContents_6"));
+        scrollAreaWidgetContents_6->setGeometry(QRect(0, 0, 554, 480));
+        gridLayout_10 = new QGridLayout(scrollAreaWidgetContents_6);
+        gridLayout_10->setSpacing(6);
+        gridLayout_10->setContentsMargins(11, 11, 11, 11);
+        gridLayout_10->setObjectName(QStringLiteral("gridLayout_10"));
+        imgU = new QLabel(scrollAreaWidgetContents_6);
+        imgU->setObjectName(QStringLiteral("imgU"));
+        imgU->setScaledContents(true);
+
+        gridLayout_10->addWidget(imgU, 0, 0, 1, 1);
+
+        scrollArea_2->setWidget(scrollAreaWidgetContents_6);
+        displayTabs->addTab(tabU, QString());
+        tabV = new QWidget();
+        tabV->setObjectName(QStringLiteral("tabV"));
+        scrollArea_5 = new QScrollArea(tabV);
+        scrollArea_5->setObjectName(QStringLiteral("scrollArea_5"));
+        scrollArea_5->setGeometry(QRect(0, 0, 570, 496));
+        scrollArea_5->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+        scrollArea_5->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+        scrollArea_5->setWidgetResizable(true);
+        scrollAreaWidgetContents_7 = new QWidget();
+        scrollAreaWidgetContents_7->setObjectName(QStringLiteral("scrollAreaWidgetContents_7"));
+        scrollAreaWidgetContents_7->setGeometry(QRect(0, 0, 554, 480));
+        gridLayout_11 = new QGridLayout(scrollAreaWidgetContents_7);
+        gridLayout_11->setSpacing(6);
+        gridLayout_11->setContentsMargins(11, 11, 11, 11);
+        gridLayout_11->setObjectName(QStringLiteral("gridLayout_11"));
+        imgV = new QLabel(scrollAreaWidgetContents_7);
+        imgV->setObjectName(QStringLiteral("imgV"));
+        imgV->setScaledContents(true);
+
+        gridLayout_11->addWidget(imgV, 0, 0, 1, 1);
+
+        scrollArea_5->setWidget(scrollAreaWidgetContents_7);
+        displayTabs->addTab(tabV, QString());
+        dct = new QWidget();
+        dct->setObjectName(QStringLiteral("dct"));
+        scrollArea_tabs_3 = new QScrollArea(dct);
+        scrollArea_tabs_3->setObjectName(QStringLiteral("scrollArea_tabs_3"));
+        scrollArea_tabs_3->setGeometry(QRect(0, 0, 581, 511));
+        scrollArea_tabs_3->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+        scrollArea_tabs_3->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+        scrollArea_tabs_3->setWidgetResizable(true);
+        scrollAreaWidgetContents_8 = new QWidget();
+        scrollAreaWidgetContents_8->setObjectName(QStringLiteral("scrollAreaWidgetContents_8"));
+        scrollAreaWidgetContents_8->setGeometry(QRect(0, 0, 565, 495));
+        gridLayout_12 = new QGridLayout(scrollAreaWidgetContents_8);
+        gridLayout_12->setSpacing(6);
+        gridLayout_12->setContentsMargins(11, 11, 11, 11);
+        gridLayout_12->setObjectName(QStringLiteral("gridLayout_12"));
+        imgDCT = new QLabel(scrollAreaWidgetContents_8);
+        imgDCT->setObjectName(QStringLiteral("imgDCT"));
+        imgDCT->setScaledContents(true);
+
+        gridLayout_12->addWidget(imgDCT, 0, 0, 1, 1);
+
+        scrollArea_tabs_3->setWidget(scrollAreaWidgetContents_8);
+        displayTabs->addTab(dct, QString());
+        output = new QWidget();
+        output->setObjectName(QStringLiteral("output"));
+        scrollArea_tabs_2 = new QScrollArea(output);
+        scrollArea_tabs_2->setObjectName(QStringLiteral("scrollArea_tabs_2"));
+        scrollArea_tabs_2->setGeometry(QRect(0, 0, 581, 511));
+        scrollArea_tabs_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+        scrollArea_tabs_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+        scrollArea_tabs_2->setWidgetResizable(true);
+        scrollAreaWidgetContents_5 = new QWidget();
+        scrollAreaWidgetContents_5->setObjectName(QStringLiteral("scrollAreaWidgetContents_5"));
+        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 565, 495));
+        gridLayout_9 = new QGridLayout(scrollAreaWidgetContents_5);
+        gridLayout_9->setSpacing(6);
+        gridLayout_9->setContentsMargins(11, 11, 11, 11);
+        gridLayout_9->setObjectName(QStringLiteral("gridLayout_9"));
+        img2 = new QLabel(scrollAreaWidgetContents_5);
         img2->setObjectName(QStringLiteral("img2"));
-        sizePolicy.setHeightForWidth(img2->sizePolicy().hasHeightForWidth());
-        img2->setSizePolicy(sizePolicy);
-        img2->setMinimumSize(QSize(128, 128));
-        img2->setMaximumSize(QSize(512, 512));
-        img2->setSizeIncrement(QSize(1, 1));
         img2->setScaledContents(true);
 
-        horizontalLayout->addWidget(img2);
+        gridLayout_9->addWidget(img2, 0, 0, 1, 1);
 
-        horizontalLayout->setStretch(0, 1);
-        horizontalLayout->setStretch(2, 1);
+        scrollArea_tabs_2->setWidget(scrollAreaWidgetContents_5);
+        displayTabs->addTab(output, QString());
 
-        gridLayout_2->addLayout(horizontalLayout, 0, 0, 1, 1);
+        gridLayout_2->addWidget(displayTabs, 1, 1, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1094, 22));
+        menuBar->setGeometry(QRect(0, 0, 1208, 22));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         MainWindow->setMenuBar(menuBar);
@@ -375,7 +520,8 @@ public:
         retranslateUi(MainWindow);
         QObject::connect(actionQuit, SIGNAL(triggered()), MainWindow, SLOT(close()));
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
+        displayTabs->setCurrentIndex(5);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -383,110 +529,115 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
-        actionQuit->setText(QApplication::translate("MainWindow", "Quit", Q_NULLPTR));
-        img1->setText(QString());
-        load->setText(QApplication::translate("MainWindow", "Load", Q_NULLPTR));
-        convert->setText(QApplication::translate("MainWindow", "Convert to YUV", Q_NULLPTR));
-        convert2rgb->setText(QApplication::translate("MainWindow", "Conver to RGB", Q_NULLPTR));
-        dct->setText(QApplication::translate("MainWindow", "Discrete Cosine Transform", Q_NULLPTR));
-        comboBox->clear();
-        comboBox->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "4:2:0", Q_NULLPTR)
-         << QApplication::translate("MainWindow", "4:2:2", Q_NULLPTR)
-         << QApplication::translate("MainWindow", "4:4:4", Q_NULLPTR)
-        );
-        subsampling_label->setText(QApplication::translate("MainWindow", "Croma Subsampling", Q_NULLPTR));
-        ubutton->setText(QApplication::translate("MainWindow", "U", Q_NULLPTR));
-        label->setText(QApplication::translate("MainWindow", "Quality (Quantization scale):", Q_NULLPTR));
-        vbutton->setText(QApplication::translate("MainWindow", "V", Q_NULLPTR));
-        ybutton->setText(QApplication::translate("MainWindow", "Y", Q_NULLPTR));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
+        actionQuit->setText(QApplication::translate("MainWindow", "Quit", nullptr));
+        convert2rgb->setText(QApplication::translate("MainWindow", "Conver to RGB", nullptr));
+        convert->setText(QApplication::translate("MainWindow", "Convert", nullptr));
+        subsampling_label->setText(QApplication::translate("MainWindow", "Croma Subsampling", nullptr));
+        label->setText(QApplication::translate("MainWindow", "Quality (Quantization scale):", nullptr));
+        load->setText(QApplication::translate("MainWindow", "Load", nullptr));
+        comboBox->setItemText(0, QApplication::translate("MainWindow", "4:2:0", nullptr));
+        comboBox->setItemText(1, QApplication::translate("MainWindow", "4:2:2", nullptr));
+        comboBox->setItemText(2, QApplication::translate("MainWindow", "4:4:4", nullptr));
+
+        enableQuant->setText(QApplication::translate("MainWindow", "Enable Qunatization", nullptr));
         QTableWidgetItem *___qtablewidgetitem = quantDisplay_lum->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "0", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = quantDisplay_lum->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "1", Q_NULLPTR));
+        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "1", nullptr));
         QTableWidgetItem *___qtablewidgetitem2 = quantDisplay_lum->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "2", Q_NULLPTR));
+        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "2", nullptr));
         QTableWidgetItem *___qtablewidgetitem3 = quantDisplay_lum->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "3", Q_NULLPTR));
+        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "3", nullptr));
         QTableWidgetItem *___qtablewidgetitem4 = quantDisplay_lum->horizontalHeaderItem(4);
-        ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "4", Q_NULLPTR));
+        ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "4", nullptr));
         QTableWidgetItem *___qtablewidgetitem5 = quantDisplay_lum->horizontalHeaderItem(5);
-        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "5", Q_NULLPTR));
+        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "5", nullptr));
         QTableWidgetItem *___qtablewidgetitem6 = quantDisplay_lum->horizontalHeaderItem(6);
-        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "6", Q_NULLPTR));
+        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "6", nullptr));
         QTableWidgetItem *___qtablewidgetitem7 = quantDisplay_lum->horizontalHeaderItem(7);
-        ___qtablewidgetitem7->setText(QApplication::translate("MainWindow", "7", Q_NULLPTR));
+        ___qtablewidgetitem7->setText(QApplication::translate("MainWindow", "7", nullptr));
         QTableWidgetItem *___qtablewidgetitem8 = quantDisplay_lum->verticalHeaderItem(0);
-        ___qtablewidgetitem8->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        ___qtablewidgetitem8->setText(QApplication::translate("MainWindow", "0", nullptr));
         QTableWidgetItem *___qtablewidgetitem9 = quantDisplay_lum->verticalHeaderItem(1);
-        ___qtablewidgetitem9->setText(QApplication::translate("MainWindow", "1", Q_NULLPTR));
+        ___qtablewidgetitem9->setText(QApplication::translate("MainWindow", "1", nullptr));
         QTableWidgetItem *___qtablewidgetitem10 = quantDisplay_lum->verticalHeaderItem(2);
-        ___qtablewidgetitem10->setText(QApplication::translate("MainWindow", "2", Q_NULLPTR));
+        ___qtablewidgetitem10->setText(QApplication::translate("MainWindow", "2", nullptr));
         QTableWidgetItem *___qtablewidgetitem11 = quantDisplay_lum->verticalHeaderItem(3);
-        ___qtablewidgetitem11->setText(QApplication::translate("MainWindow", "3", Q_NULLPTR));
+        ___qtablewidgetitem11->setText(QApplication::translate("MainWindow", "3", nullptr));
         QTableWidgetItem *___qtablewidgetitem12 = quantDisplay_lum->verticalHeaderItem(4);
-        ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "4", Q_NULLPTR));
+        ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "4", nullptr));
         QTableWidgetItem *___qtablewidgetitem13 = quantDisplay_lum->verticalHeaderItem(5);
-        ___qtablewidgetitem13->setText(QApplication::translate("MainWindow", "5", Q_NULLPTR));
+        ___qtablewidgetitem13->setText(QApplication::translate("MainWindow", "5", nullptr));
         QTableWidgetItem *___qtablewidgetitem14 = quantDisplay_lum->verticalHeaderItem(6);
-        ___qtablewidgetitem14->setText(QApplication::translate("MainWindow", "6", Q_NULLPTR));
+        ___qtablewidgetitem14->setText(QApplication::translate("MainWindow", "6", nullptr));
         QTableWidgetItem *___qtablewidgetitem15 = quantDisplay_lum->verticalHeaderItem(7);
-        ___qtablewidgetitem15->setText(QApplication::translate("MainWindow", "7", Q_NULLPTR));
+        ___qtablewidgetitem15->setText(QApplication::translate("MainWindow", "7", nullptr));
 
         const bool __sortingEnabled = quantDisplay_lum->isSortingEnabled();
         quantDisplay_lum->setSortingEnabled(false);
         QTableWidgetItem *___qtablewidgetitem16 = quantDisplay_lum->item(0, 0);
-        ___qtablewidgetitem16->setText(QApplication::translate("MainWindow", "123", Q_NULLPTR));
+        ___qtablewidgetitem16->setText(QApplication::translate("MainWindow", "123", nullptr));
         QTableWidgetItem *___qtablewidgetitem17 = quantDisplay_lum->item(1, 0);
-        ___qtablewidgetitem17->setText(QApplication::translate("MainWindow", "21", Q_NULLPTR));
+        ___qtablewidgetitem17->setText(QApplication::translate("MainWindow", "21", nullptr));
         quantDisplay_lum->setSortingEnabled(__sortingEnabled);
 
-        tabWidget->setTabText(tabWidget->indexOf(tab_1), QApplication::translate("MainWindow", "Y Qunatization", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_1), QApplication::translate("MainWindow", "Y Qunatization", nullptr));
         QTableWidgetItem *___qtablewidgetitem18 = quantDisplay_chr->horizontalHeaderItem(0);
-        ___qtablewidgetitem18->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        ___qtablewidgetitem18->setText(QApplication::translate("MainWindow", "0", nullptr));
         QTableWidgetItem *___qtablewidgetitem19 = quantDisplay_chr->horizontalHeaderItem(1);
-        ___qtablewidgetitem19->setText(QApplication::translate("MainWindow", "1", Q_NULLPTR));
+        ___qtablewidgetitem19->setText(QApplication::translate("MainWindow", "1", nullptr));
         QTableWidgetItem *___qtablewidgetitem20 = quantDisplay_chr->horizontalHeaderItem(2);
-        ___qtablewidgetitem20->setText(QApplication::translate("MainWindow", "2", Q_NULLPTR));
+        ___qtablewidgetitem20->setText(QApplication::translate("MainWindow", "2", nullptr));
         QTableWidgetItem *___qtablewidgetitem21 = quantDisplay_chr->horizontalHeaderItem(3);
-        ___qtablewidgetitem21->setText(QApplication::translate("MainWindow", "3", Q_NULLPTR));
+        ___qtablewidgetitem21->setText(QApplication::translate("MainWindow", "3", nullptr));
         QTableWidgetItem *___qtablewidgetitem22 = quantDisplay_chr->horizontalHeaderItem(4);
-        ___qtablewidgetitem22->setText(QApplication::translate("MainWindow", "4", Q_NULLPTR));
+        ___qtablewidgetitem22->setText(QApplication::translate("MainWindow", "4", nullptr));
         QTableWidgetItem *___qtablewidgetitem23 = quantDisplay_chr->horizontalHeaderItem(5);
-        ___qtablewidgetitem23->setText(QApplication::translate("MainWindow", "5", Q_NULLPTR));
+        ___qtablewidgetitem23->setText(QApplication::translate("MainWindow", "5", nullptr));
         QTableWidgetItem *___qtablewidgetitem24 = quantDisplay_chr->horizontalHeaderItem(6);
-        ___qtablewidgetitem24->setText(QApplication::translate("MainWindow", "6", Q_NULLPTR));
+        ___qtablewidgetitem24->setText(QApplication::translate("MainWindow", "6", nullptr));
         QTableWidgetItem *___qtablewidgetitem25 = quantDisplay_chr->horizontalHeaderItem(7);
-        ___qtablewidgetitem25->setText(QApplication::translate("MainWindow", "7", Q_NULLPTR));
+        ___qtablewidgetitem25->setText(QApplication::translate("MainWindow", "7", nullptr));
         QTableWidgetItem *___qtablewidgetitem26 = quantDisplay_chr->verticalHeaderItem(0);
-        ___qtablewidgetitem26->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        ___qtablewidgetitem26->setText(QApplication::translate("MainWindow", "0", nullptr));
         QTableWidgetItem *___qtablewidgetitem27 = quantDisplay_chr->verticalHeaderItem(1);
-        ___qtablewidgetitem27->setText(QApplication::translate("MainWindow", "1", Q_NULLPTR));
+        ___qtablewidgetitem27->setText(QApplication::translate("MainWindow", "1", nullptr));
         QTableWidgetItem *___qtablewidgetitem28 = quantDisplay_chr->verticalHeaderItem(2);
-        ___qtablewidgetitem28->setText(QApplication::translate("MainWindow", "2", Q_NULLPTR));
+        ___qtablewidgetitem28->setText(QApplication::translate("MainWindow", "2", nullptr));
         QTableWidgetItem *___qtablewidgetitem29 = quantDisplay_chr->verticalHeaderItem(3);
-        ___qtablewidgetitem29->setText(QApplication::translate("MainWindow", "3", Q_NULLPTR));
+        ___qtablewidgetitem29->setText(QApplication::translate("MainWindow", "3", nullptr));
         QTableWidgetItem *___qtablewidgetitem30 = quantDisplay_chr->verticalHeaderItem(4);
-        ___qtablewidgetitem30->setText(QApplication::translate("MainWindow", "4", Q_NULLPTR));
+        ___qtablewidgetitem30->setText(QApplication::translate("MainWindow", "4", nullptr));
         QTableWidgetItem *___qtablewidgetitem31 = quantDisplay_chr->verticalHeaderItem(5);
-        ___qtablewidgetitem31->setText(QApplication::translate("MainWindow", "5", Q_NULLPTR));
+        ___qtablewidgetitem31->setText(QApplication::translate("MainWindow", "5", nullptr));
         QTableWidgetItem *___qtablewidgetitem32 = quantDisplay_chr->verticalHeaderItem(6);
-        ___qtablewidgetitem32->setText(QApplication::translate("MainWindow", "6", Q_NULLPTR));
+        ___qtablewidgetitem32->setText(QApplication::translate("MainWindow", "6", nullptr));
         QTableWidgetItem *___qtablewidgetitem33 = quantDisplay_chr->verticalHeaderItem(7);
-        ___qtablewidgetitem33->setText(QApplication::translate("MainWindow", "7", Q_NULLPTR));
+        ___qtablewidgetitem33->setText(QApplication::translate("MainWindow", "7", nullptr));
 
         const bool __sortingEnabled1 = quantDisplay_chr->isSortingEnabled();
         quantDisplay_chr->setSortingEnabled(false);
         QTableWidgetItem *___qtablewidgetitem34 = quantDisplay_chr->item(0, 0);
-        ___qtablewidgetitem34->setText(QApplication::translate("MainWindow", "123", Q_NULLPTR));
+        ___qtablewidgetitem34->setText(QApplication::translate("MainWindow", "123", nullptr));
         QTableWidgetItem *___qtablewidgetitem35 = quantDisplay_chr->item(1, 0);
-        ___qtablewidgetitem35->setText(QApplication::translate("MainWindow", "21", Q_NULLPTR));
+        ___qtablewidgetitem35->setText(QApplication::translate("MainWindow", "21", nullptr));
         quantDisplay_chr->setSortingEnabled(__sortingEnabled1);
 
-        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "UV Qunatization", Q_NULLPTR));
-        img2->setText(QString());
-        menuFile->setTitle(QApplication::translate("MainWindow", "File", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "UV Qunatization", nullptr));
+        img1->setText(QApplication::translate("MainWindow", "Y", nullptr));
+        displayTabs->setTabText(displayTabs->indexOf(original), QApplication::translate("MainWindow", "Original", nullptr));
+        imgY->setText(QApplication::translate("MainWindow", "Y", nullptr));
+        displayTabs->setTabText(displayTabs->indexOf(tabY), QApplication::translate("MainWindow", "Y", nullptr));
+        imgU->setText(QApplication::translate("MainWindow", "U", nullptr));
+        displayTabs->setTabText(displayTabs->indexOf(tabU), QApplication::translate("MainWindow", "U", nullptr));
+        imgV->setText(QApplication::translate("MainWindow", "V", nullptr));
+        displayTabs->setTabText(displayTabs->indexOf(tabV), QApplication::translate("MainWindow", "V", nullptr));
+        imgDCT->setText(QApplication::translate("MainWindow", "DCT", nullptr));
+        displayTabs->setTabText(displayTabs->indexOf(dct), QApplication::translate("MainWindow", "DCT", nullptr));
+        img2->setText(QApplication::translate("MainWindow", "Y", nullptr));
+        displayTabs->setTabText(displayTabs->indexOf(output), QApplication::translate("MainWindow", "Output", nullptr));
+        menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
     } // retranslateUi
 
 };
