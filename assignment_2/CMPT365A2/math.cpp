@@ -115,6 +115,7 @@ void chroma_subsample(cv::Mat &img, int a, int b, int c) {
 }
 
 //https://www.mathworks.com/help/images/ref/dct2.html
+//dont use this garbage
 cv::Mat1d block_dct(cv::Mat1b block) {//might change the input format
 
     int m,n;
@@ -153,7 +154,7 @@ cv::Mat1d block_dct(cv::Mat1b block) {//might change the input format
             dct_form[i][j] = (ai * aj * sum);
         }
     }// this is new to me but is should morve the dct var out insted of copyingit
-    return std::move(dct_form);
+    return (dct_form);
 }
 
 cv::Mat idct(cv::Mat &block) {
@@ -199,19 +200,20 @@ cv::Mat idct(cv::Mat &block) {
     return (yuv_form); // this is new to me but is should morve the dct var out insted of copying it
 }
 
-void quant(cv::Mat block, int q[8][8], double scale ) {
+void quant(cv::Matx<double,8,8> block, int q[8][8], double scale ) {
     assert(block.cols == 8 && block.rows == 8);
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
-            block.at<double>(i,j) *= 1/(static_cast<double>(q[i][j]) * scale);
+            block(i,j) = block(i,j)/(static_cast<double>(q[i][j]) * scale);
+            block(i,j) = round(block(i,j));
         }
     }
 }
-void iquant(cv::Mat block, int q[8][8], double scale ) {
+void iquant(cv::Matx<double,8,8> block, int q[8][8], double scale ) {
     assert(block.cols == 8 && block.rows == 8);
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
-            block.at<double>(i,j) *= (static_cast<double>(q[i][j]) * scale);
+            block(i,j) = block(i,j)*(static_cast<double>(q[i][j]) * scale);
         }
     }
 }
@@ -237,10 +239,10 @@ cv::Mat runDctOnImage(cv::Mat &img) {
     split(dctmat, yuv);
 
     //temp DCT of image
-    cv::Mat smalldctmat;
+    cv::Matx<double,8,8> smalldctmat;
 
     //crop image in 8*8 block to be passed to dct
-    cv::Mat small;
+    cv::Matx<double,8,8> small;
 
 
     for (int ch=0; ch<3; ch++)
@@ -254,21 +256,22 @@ cv::Mat runDctOnImage(cv::Mat &img) {
                cv::Rect Rec(i,j,8,8);
                small = (yuv[ch](Rec));
 
-               smalldctmat = block_dct(small);
 
-//               smalldctmat = idct(smalldctmat);
+                smalldctmat = dct88(small);
 
-//               if (ch == 0) {
-//               quant(smalldctmat, lum_quant, 1 );
-//               }
+                if (ch == 0) {
+                    quant(smalldctmat, lum_quant, 1 );
+                    iquant(smalldctmat, lum_quant, 1 );
+                }
 
-//               else {
-//               quant(smalldctmat, chr_quant, 1 );
-//               }
-
+                else {
+                    quant(smalldctmat, chr_quant, 1 );
+                    iquant(smalldctmat, chr_quant, 1 );
+                }
+               smalldctmat = idct88(smalldctmat);
                //Store the DCT on the image block
 
-               smalldctmat.copyTo(yuv[ch](Rec));
+               cv::Mat(smalldctmat).copyTo(yuv[ch](Rec));
 
             }
         }
@@ -276,4 +279,27 @@ cv::Mat runDctOnImage(cv::Mat &img) {
 
     merge(yuv, 3, result);
     return result;
+}
+
+
+void init_dct() {
+    for (int i=0; i<8; i++){
+        for (int j=0; j<8; j++){
+            if(i == 0 ) {
+                dctMatrix(i,j) = 0.5/sqrt(2);
+            } else {
+                dctMatrix(i,j) = 0.5*cos((2*j+1)*i*M_PI / 16);
+
+            }
+
+        }
+    }
+}
+
+cv::Matx<double,8,8> dct88(cv::Matx<double,8,8> f) {
+    return dctMatrix * f * dctMatrix.t();
+}
+
+cv::Matx<double,8,8> idct88(cv::Matx<double,8,8> F) {
+    return dctMatrix.t() * F * dctMatrix;
 }

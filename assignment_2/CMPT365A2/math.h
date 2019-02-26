@@ -5,7 +5,7 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/opencv.hpp>
-
+#include <cmath>
 //########
 //UNTESTED
 //########
@@ -39,6 +39,8 @@ static int uniform_quant[8][8] = {
 
 };
 
+static cv::Matx<double,8,8> dctMatrix;
+
 
 //prefroms dct on a n x m matric returns an nx m matric of ints that are the dct fourm
 cv::Mat1d block_dct(cv::Mat1b &block);
@@ -46,13 +48,17 @@ cv::Mat1d block_dct(cv::Mat1b &block);
 //reverses the dct matrix returns in unsigned char
 cv::Mat idct(cv::Mat &block);
 
+void init_dct();
+
+cv::Matx<double,8,8> dct88(cv::Matx<double,8,8> f);
+cv::Matx<double,8,8> idct88(cv::Matx<double,8,8> F);
 
 // Run DCT on every 8*8 blocks in the image on everychannel and return the resulting DCT matrix in a matarray bgr[3]
 cv::Mat runDctOnImage(cv::Mat &img);
 
 
-void quant(cv::Mat block, int q[8][8], double scale );
-void iquant(cv::Mat block, int q[8][8], double scale );
+void quant(cv::Matx<double,8,8> block, int q[8][8], double scale );
+void iquant(cv::Matx<double,8,8> block, int q[8][8], double scale );
 
 //########
 //HALF TESTED
