@@ -44,8 +44,11 @@ public:
     QPushButton *convert;
     QPushButton *dct;
     QGridLayout *gridLayout;
-    QLabel *subsampling_label;
     QComboBox *comboBox;
+    QPushButton *ybutton;
+    QLabel *subsampling_label;
+    QPushButton *ubutton;
+    QPushButton *vbutton;
     QHBoxLayout *horizontalLayout_2;
     QSpacerItem *horizontalSpacer_2;
     QTableWidget *quantDisplay;
@@ -115,11 +118,6 @@ public:
         gridLayout = new QGridLayout();
         gridLayout->setSpacing(0);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        subsampling_label = new QLabel(centralWidget);
-        subsampling_label->setObjectName(QStringLiteral("subsampling_label"));
-
-        gridLayout->addWidget(subsampling_label, 1, 4, 1, 1);
-
         comboBox = new QComboBox(centralWidget);
         comboBox->setObjectName(QStringLiteral("comboBox"));
         QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
@@ -128,7 +126,27 @@ public:
         sizePolicy1.setHeightForWidth(comboBox->sizePolicy().hasHeightForWidth());
         comboBox->setSizePolicy(sizePolicy1);
 
-        gridLayout->addWidget(comboBox, 1, 5, 1, 1);
+        gridLayout->addWidget(comboBox, 5, 5, 1, 1);
+
+        ybutton = new QPushButton(centralWidget);
+        ybutton->setObjectName(QStringLiteral("ybutton"));
+
+        gridLayout->addWidget(ybutton, 2, 5, 1, 1);
+
+        subsampling_label = new QLabel(centralWidget);
+        subsampling_label->setObjectName(QStringLiteral("subsampling_label"));
+
+        gridLayout->addWidget(subsampling_label, 5, 4, 1, 1);
+
+        ubutton = new QPushButton(centralWidget);
+        ubutton->setObjectName(QStringLiteral("ubutton"));
+
+        gridLayout->addWidget(ubutton, 3, 5, 1, 1);
+
+        vbutton = new QPushButton(centralWidget);
+        vbutton->setObjectName(QStringLiteral("vbutton"));
+
+        gridLayout->addWidget(vbutton, 4, 5, 1, 1);
 
 
         verticalLayout->addLayout(gridLayout);
@@ -265,13 +283,16 @@ public:
         load->setText(QApplication::translate("MainWindow", "Load", Q_NULLPTR));
         convert->setText(QApplication::translate("MainWindow", "Convert", Q_NULLPTR));
         dct->setText(QApplication::translate("MainWindow", "Discrete Cosine Transform", Q_NULLPTR));
-        subsampling_label->setText(QApplication::translate("MainWindow", "Croma Subsampling", Q_NULLPTR));
         comboBox->clear();
         comboBox->insertItems(0, QStringList()
          << QApplication::translate("MainWindow", "4:2:0", Q_NULLPTR)
          << QApplication::translate("MainWindow", "4:2:2", Q_NULLPTR)
          << QApplication::translate("MainWindow", "4:4:4", Q_NULLPTR)
         );
+        ybutton->setText(QApplication::translate("MainWindow", "Y", Q_NULLPTR));
+        subsampling_label->setText(QApplication::translate("MainWindow", "Croma Subsampling", Q_NULLPTR));
+        ubutton->setText(QApplication::translate("MainWindow", "U", Q_NULLPTR));
+        vbutton->setText(QApplication::translate("MainWindow", "V", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem = quantDisplay->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem1 = quantDisplay->horizontalHeaderItem(1);

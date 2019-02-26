@@ -39,6 +39,9 @@ static int uniform_quant[8][8] = {
 
 };
 
+//helper function to resize images to have colums and rows that are multiple of 8
+void resize8x8(cv::Mat &img);
+
 
 //prefroms dct on a n x m matric returns an nx m matric of ints that are the dct fourm
 cv::Mat1d block_dct(cv::Mat1b &block);

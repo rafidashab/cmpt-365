@@ -78,6 +78,10 @@ void MainWindow::on_load_clicked()
         tr("Load Image"), "",
         tr("All Files (*)"));
     cvImg = cv::imread(fileName.toStdString(), IMREAD_COLOR);
+
+    //resize the loaded image to have column and row that are multiple of 8;
+    resize8x8(cvImg);
+
     QImage qImage = MatRGB2QImage(cvImg);
     ui->img1->setPixmap(QPixmap::fromImage(qImage));
     //ui->img1->resize(cvImg.cols, cvImg.rows);
@@ -92,6 +96,10 @@ void MainWindow::on_convert_clicked()
     cvImg.copyTo(convertedImg);
     std::cout<< convertedImg.type() << std::endl;
     rgb2yuv(convertedImg);
+
+    cv::Mat yuv[3];
+    split(convertedImg, yuv);
+
     chroma_subsample(convertedImg, subsampling[0], subsampling[1], subsampling[2]);
     yuv2rgb(convertedImg);
     QImage qImage = MatRGB2QImage(convertedImg);
@@ -128,4 +136,40 @@ void MainWindow::on_dct_clicked()
     QImage qImage = MatRGB2QImage(convertedImg);
     ui->img2->setPixmap(QPixmap::fromImage(qImage));
 
+}
+
+void MainWindow::on_ybutton_clicked()
+{
+    cvImg.copyTo(convertedImg);
+    rgb2yuv(convertedImg);
+    cv::Mat yuv[3];
+    split(convertedImg, yuv);
+
+    QImage qImage = MatGrayScale2QImage(yuv[0]);
+    ui->img2->setPixmap(QPixmap::fromImage(qImage));
+
+}
+
+void MainWindow::on_ubutton_clicked()
+{
+    cvImg.copyTo(convertedImg);
+    rgb2yuv(convertedImg);
+    cv::Mat yuv[3];
+    split(convertedImg, yuv);
+
+    QImage qImage = MatGrayScale2QImage(yuv[1]);
+    ui->img2->setPixmap(QPixmap::fromImage(qImage));
+}
+
+
+
+void MainWindow::on_vbutton_clicked()
+{
+    cvImg.copyTo(convertedImg);
+    rgb2yuv(convertedImg);
+    cv::Mat yuv[3];
+    split(convertedImg, yuv);
+
+    QImage qImage = MatGrayScale2QImage(yuv[2]);
+    ui->img2->setPixmap(QPixmap::fromImage(qImage));
 }

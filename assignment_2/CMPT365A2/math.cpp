@@ -216,6 +216,16 @@ void iquant(cv::Mat block, int q[8][8], double scale ) {
     }
 }
 
+
+void resize8x8(cv::Mat &img) {
+
+    int newRows = img.rows - (img.rows % 8);
+    int newCols = img.cols - (img.cols % 8); //this will cause any image less than 8x8 to be lost though so padding is better i think
+
+    cv::Size size(newRows,newCols);
+    resize(img,img,size); //Resize the image to be have rows and coloums that are multiple of 8
+}
+
 cv::Mat runDctOnImage(cv::Mat &img) {
 
     //copy the imput image to a new matrix
@@ -223,14 +233,7 @@ cv::Mat runDctOnImage(cv::Mat &img) {
     cv::Mat result;
     img.copyTo(dctmat);
 
-
-    //Risize
-    int newRows = dctmat.rows - (dctmat.rows % 8);
-    int newCols = dctmat.cols - (dctmat.cols % 8); //this will cause any image less than 8x8 to be lost though so padding is better i think
-
-    cv::Size size(newRows,newCols);
-    resize(dctmat,dctmat,size); //Resize the image to be have rows and coloums that are multiple of 8
-
+    resize8x8(dctmat);
 
     //seperate the 3 RGB channels
     cv::Mat yuv[3];

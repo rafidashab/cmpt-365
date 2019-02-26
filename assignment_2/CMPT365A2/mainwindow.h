@@ -48,6 +48,12 @@ private slots:
 
     void on_dct_clicked();
 
+    void on_ybutton_clicked();
+
+    void on_ubutton_clicked();
+
+    void on_vbutton_clicked();
+
 private:
     QImage MatRGB2QImage(const cv::Mat3b &src);
     QImage MatGrayScale2QImage(const cv::Mat_<double> &src);
