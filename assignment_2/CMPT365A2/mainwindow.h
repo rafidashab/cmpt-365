@@ -50,6 +50,8 @@ private slots:
 
     void on_enableQuant_toggled(bool checked);
 
+    void on_comboBox_2_currentIndexChanged(int index);
+
 private:
     QImage MatRGB2QImage(const cv::Mat3b &src);
     QImage MatGrayScale2QImage(const cv::Mat_<double> &src);

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.9.5)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.11.3)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,7 +12,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'mainwindow.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.9.5. It"
+#error "This file was generated using the moc from 5.11.3. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[10];
-    char stringdata0[152];
+    QByteArrayData data[11];
+    char stringdata0[186];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,13 +40,15 @@ QT_MOC_LITERAL(5, 79, 5), // "index"
 QT_MOC_LITERAL(6, 85, 29), // "on_qualitySlider_valueChanged"
 QT_MOC_LITERAL(7, 115, 5), // "value"
 QT_MOC_LITERAL(8, 121, 22), // "on_enableQuant_toggled"
-QT_MOC_LITERAL(9, 144, 7) // "checked"
+QT_MOC_LITERAL(9, 144, 7), // "checked"
+QT_MOC_LITERAL(10, 152, 33) // "on_comboBox_2_currentIndexCha..."
 
     },
     "MainWindow\0on_load_clicked\0\0"
     "on_convert_clicked\0on_comboBox_currentIndexChanged\0"
     "index\0on_qualitySlider_valueChanged\0"
-    "value\0on_enableQuant_toggled\0checked"
+    "value\0on_enableQuant_toggled\0checked\0"
+    "on_comboBox_2_currentIndexChanged"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,7 +58,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -64,11 +66,12 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   39,    2, 0x08 /* Private */,
-       3,    0,   40,    2, 0x08 /* Private */,
-       4,    1,   41,    2, 0x08 /* Private */,
-       6,    1,   44,    2, 0x08 /* Private */,
-       8,    1,   47,    2, 0x08 /* Private */,
+       1,    0,   44,    2, 0x08 /* Private */,
+       3,    0,   45,    2, 0x08 /* Private */,
+       4,    1,   46,    2, 0x08 /* Private */,
+       6,    1,   49,    2, 0x08 /* Private */,
+       8,    1,   52,    2, 0x08 /* Private */,
+      10,    1,   55,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -76,6 +79,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void, QMetaType::Int,    5,
     QMetaType::Void, QMetaType::Int,    7,
     QMetaType::Void, QMetaType::Bool,    9,
+    QMetaType::Void, QMetaType::Int,    5,
 
        0        // eod
 };
@@ -91,12 +95,13 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 2: _t->on_comboBox_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 3: _t->on_qualitySlider_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 4: _t->on_enableQuant_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 5: _t->on_comboBox_2_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
 }
 
-const QMetaObject MainWindow::staticMetaObject = {
+QT_INIT_METAOBJECT const QMetaObject MainWindow::staticMetaObject = {
     { &QMainWindow::staticMetaObject, qt_meta_stringdata_MainWindow.data,
       qt_meta_data_MainWindow,  qt_static_metacall, nullptr, nullptr}
 };
@@ -121,13 +126,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 6)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }
