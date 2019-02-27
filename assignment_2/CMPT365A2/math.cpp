@@ -305,7 +305,7 @@ void runDctOnImage(cv::Mat &img, cv::Mat &dct, double quality, bool should_quant
 
                    else {
                        quant(smalldctmat, chr_quant, quality );
-                       iquant(smalldctmat, lum_quant, quality );
+                       iquant(smalldctmat, chr_quant, quality );  //use the right matrix
                    }
                }
                 cv::Mat(smalldctmat).copyTo(dctret[ch](Rec));
