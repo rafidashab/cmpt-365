@@ -46,7 +46,7 @@ private slots:
 
     void on_qualitySlider_valueChanged(int value);
 
-    void on_convert2rgb_clicked();
+    //void on_convert2rgb_clicked();
 
     void on_enableQuant_toggled(bool checked);
 

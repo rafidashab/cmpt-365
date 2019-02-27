@@ -42,16 +42,15 @@ public:
     QWidget *centralWidget;
     QGridLayout *gridLayout_2;
     QVBoxLayout *verticalLayout;
-    QPushButton *convert2rgb;
     QGridLayout *gridLayout;
     QPushButton *convert;
     QLineEdit *qualityDisplay;
-    QLabel *subsampling_label;
     QLabel *label;
     QPushButton *load;
     QComboBox *comboBox;
     QRadioButton *enableQuant;
     QSlider *qualitySlider;
+    QLabel *subsampling_label;
     QHBoxLayout *horizontalLayout_2;
     QSpacerItem *horizontalSpacer_2;
     QTabWidget *tabWidget;
@@ -121,11 +120,6 @@ public:
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        convert2rgb = new QPushButton(centralWidget);
-        convert2rgb->setObjectName(QStringLiteral("convert2rgb"));
-
-        verticalLayout->addWidget(convert2rgb);
-
         gridLayout = new QGridLayout();
         gridLayout->setSpacing(0);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
@@ -145,11 +139,6 @@ public:
         qualityDisplay->setReadOnly(true);
 
         gridLayout->addWidget(qualityDisplay, 6, 5, 1, 1);
-
-        subsampling_label = new QLabel(centralWidget);
-        subsampling_label->setObjectName(QStringLiteral("subsampling_label"));
-
-        gridLayout->addWidget(subsampling_label, 5, 4, 1, 1);
 
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
@@ -191,6 +180,11 @@ public:
         qualitySlider->setOrientation(Qt::Horizontal);
 
         gridLayout->addWidget(qualitySlider, 7, 5, 1, 1);
+
+        subsampling_label = new QLabel(centralWidget);
+        subsampling_label->setObjectName(QStringLiteral("subsampling_label"));
+
+        gridLayout->addWidget(subsampling_label, 5, 4, 1, 1);
 
 
         verticalLayout->addLayout(gridLayout);
@@ -531,9 +525,7 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
         actionQuit->setText(QApplication::translate("MainWindow", "Quit", nullptr));
-        convert2rgb->setText(QApplication::translate("MainWindow", "Conver to RGB", nullptr));
         convert->setText(QApplication::translate("MainWindow", "Convert", nullptr));
-        subsampling_label->setText(QApplication::translate("MainWindow", "Croma Subsampling", nullptr));
         label->setText(QApplication::translate("MainWindow", "Quality (Quantization scale):", nullptr));
         load->setText(QApplication::translate("MainWindow", "Load", nullptr));
         comboBox->setItemText(0, QApplication::translate("MainWindow", "4:2:0", nullptr));
@@ -541,6 +533,7 @@ public:
         comboBox->setItemText(2, QApplication::translate("MainWindow", "4:4:4", nullptr));
 
         enableQuant->setText(QApplication::translate("MainWindow", "Enable Qunatization", nullptr));
+        subsampling_label->setText(QApplication::translate("MainWindow", "Croma Subsampling", nullptr));
         QTableWidgetItem *___qtablewidgetitem = quantDisplay_lum->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "0", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = quantDisplay_lum->horizontalHeaderItem(1);

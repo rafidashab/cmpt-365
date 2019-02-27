@@ -30,7 +30,6 @@ MainWindow::MainWindow(QWidget *parent) :
             }
 
             ui->quantDisplay_chr->item(i,j)->setText(QString::number(chr_quant[i][j]));
-
         }
     }
 
@@ -204,16 +203,16 @@ void MainWindow::on_qualitySlider_valueChanged(int value)
     on_convert_clicked();
 }
 
-void MainWindow::on_convert2rgb_clicked()
-{
-    if (rgb == false) {
-    yuv2rgb(convertedImg);
-    QImage qImage = MatRGB2QImage(convertedImg);
-    ui->img2->setPixmap(QPixmap::fromImage(qImage));
-    rgb = true;
-    }
+//void MainWindow::on_convert2rgb_clicked()
+//{
+//    if (rgb == false) {
+//    yuv2rgb(convertedImg);
+//    QImage qImage = MatRGB2QImage(convertedImg);
+//    ui->img2->setPixmap(QPixmap::fromImage(qImage));
+//    rgb = true;
+//    }
 
-}
+//}
 
 void MainWindow::on_enableQuant_toggled(bool checked)
 {
