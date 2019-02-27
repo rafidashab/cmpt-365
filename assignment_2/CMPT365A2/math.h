@@ -34,9 +34,9 @@ static int chr_quant[8][8] = {
         {99,99,99,99,99,99,99,99}
         };
 
-static int uniform_quant[8][8] = {
+//static int uniform_quant[8][8] = {
 
-};
+//};
 
 
 static cv::Matx<double,8,8> dctMatrix;

@@ -204,7 +204,7 @@ void quant(cv::Matx<double,8,8> &block, int q[8][8], double scale ) {
     assert(block.cols == 8 && block.rows == 8);
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
-            double tmp = block(i,j);
+            //double tmp = block(i,j);
             block(i,j) = block(i,j)/(static_cast<double>(q[i][j]) * scale);
             block(i,j) = round(block(i,j));
 //            assert(block(i,j) != tmp);
